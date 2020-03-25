@@ -166,6 +166,7 @@ ApplicationWindow {
                     Layout.row: 5
                     Layout.column: 0
                 }
+
                 RowLayout {
                     Layout.fillWidth: true
                     Layout.columnSpan: 3
@@ -357,36 +358,171 @@ ApplicationWindow {
                 padding: 10
                 font.bold: true
             }
-            GridLayout {
-                //anchors.fill: parent
-                columns: 3 //колонка
-                //rows: 10 //строчка
 
-                Image {
-                    id: image1
-                    width: 50; height: 50
-                    source: "pic_1.jpg"
-                    Layout.row: 0
-                    Layout.column: 0
+            GridLayout {
+                RowLayout{
+                               Layout.fillWidth: true
+                                Layout.row: 1
+                                Layout.column: 0
+                                Layout.columnSpan: 2
+            Item {
+            width: 150
+            height: 150
+
+            Image {
+
+            id: bug
+            source: "pic_1.jpg"
+            sourceSize: Qt.size(parent.width, parent.height)
+
+            smooth: true
+            visible: false
+            }
+
+            Desaturate {
+            anchors.fill: bug
+            source: bug
+            desaturation: sliderDesaturation.value
+            }
+
+
+            }
+            Slider {
+            id: sliderDesaturation
+            }
+
+            }
+
+                Item {
+                    width:  300
+                    height:  300
+
+                    Image {
+                        id:  bugg
+                        source:  "pic_1.jpg"
+                        sourceSize:  Qt.size( parent.width,  parent.height)
+                        smooth:  true
+                        visible:  false
+                    }
+
+                    Image {
+                        id:  mask
+                        source:  "pic_2.png"
+                        sourceSize:  Qt.size( parent.width,  parent.height)
+                        smooth:  true
+                        visible:  false
+                    }
+
+                    OpacityMask {
+
+                        anchors.fill:  bugg
+                        source:  bugg
+                        maskSource: mask
+                    }
+
                 }
-                LinearGradient{
-                id: mask
-                anchors.fill: image1
-                gradient: Gradient {
-                    GradientStop { position: 0.3; color: "#ffffffff" }
-                    GradientStop { position: 0.5; color: "#00ffffff" }
+                SpinBox{
+                id: mon
                 }
-                start: Qt.point(0, 0)
-                          end: Qt.point(300, 0)
-                          visible: false
-                }
-                MaskedBlur {
-                anchors.fill: image1 //eссылка на картинку
-                source: image1
-                maskSource: mask
-                radius: 16
-                samples: 24
-                }
+
+
+
+
+//            RowLayout{
+//                Layout.fillWidth: true
+//                Layout.row: 1
+//                Layout.column: 0
+//                Layout.columnSpan: 2
+//                Image {
+
+//                id: bugg
+//                source: "pic_1.jpg"
+//                sourceSize: Qt.size(parent.width, parent.height)
+
+//                smooth: true
+//                visible: false
+//                }
+
+//                Desaturate {
+//                anchors.fill: bugg
+//                source: bugg
+//                desaturation: sliderDesaturationn.value
+//                }
+//                Slider {
+//                id: sliderDesaturationn
+//                }
+
+
+
+
+//            }
+
+//            RowLayout{
+//                Layout.fillWidth: true
+//                Layout.row: 2
+//                Layout.column: 0
+//                Layout.columnSpan: 2
+//                Image {
+
+//                id: buggg
+//                source: "pic_1.jpg"
+//                sourceSize: Qt.size(parent.width, parent.height)
+
+//                smooth: true
+//                visible: false
+//                }
+
+//                Desaturate {
+//                anchors.fill: buggg
+//                source: buggg
+//                desaturation: sliderDesaturationnn.value
+//                }
+//                Slider {
+//                id: sliderDesaturationnn
+//                }
+//                }
+
+            }
+
+
+}
+
+
+
+
+//            GridLayout {
+//                //anchors.fill: parent
+//                columns: 3 //колонка
+//                //rows: 10 //строчка
+
+//                Image {
+//                    id: image1
+//                    //Layout.fillWidth: 50
+//                    //Layout.fillHeight: 50
+//                    source: "pic_1.jpg"
+//                    Layout.row: 0
+//                    Layout.column: 0
+//                    Layout.fillWidth: 50
+//                    Layout.fillHeight: 50
+//                }
+//                LinearGradient{
+//                id: mask
+//                anchors.fill: image1
+//                gradient: Gradient {
+//                    GradientStop { position: 0.3; color: "#ffffffff" }
+//                    GradientStop { position: 0.5; color: "#00ffffff" }
+//                }
+//                start: Qt.point(0, 0)
+//                          end: Qt.point(300, 0)
+//                          visible: false
+//                }
+//                MaskedBlur {
+//                anchors.fill: image1 //eссылка на картинку
+//                source: image1
+//                maskSource: mask
+//                radius: 16
+//                samples: 24
+//                }
 //                Slider{
 //                    Layout.row: 2
 //                    Layout.column: 1
@@ -407,7 +543,8 @@ ApplicationWindow {
 //                Layout.row: 2
 //                Layout.column: 0
 //            }
-            }
+            //}
+
             //Tumbler{
                //Layout.row: 2
                // Layout.column: 1
@@ -417,7 +554,10 @@ ApplicationWindow {
                // Layout.column: 2
            // }
 
-        }
+
+
+
+
         Page {
             GridLayout {
                 //anchors.fill: parent

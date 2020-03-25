@@ -5,5 +5,6 @@
         <file>Page2Form.ui.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>pic_1.jpg</file>
+        <file>pic_2.png</file>
     </qresource>
 </RCC>

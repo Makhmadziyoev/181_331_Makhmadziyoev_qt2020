@@ -361,247 +361,200 @@ ApplicationWindow {
 
             GridLayout {
                 RowLayout{
-                               Layout.fillWidth: true
-                                Layout.row: 1
-                                Layout.column: 0
-                                Layout.columnSpan: 2
-            Item {
-            width: 150
-            height: 150
-
-            Image {
-
-            id: bug
-            source: "pic_1.jpg"
-            sourceSize: Qt.size(parent.width, parent.height)
-
-            smooth: true
-            visible: false
-            }
-
-            Desaturate {
-            anchors.fill: bug
-            source: bug
-            desaturation: sliderDesaturation.value
-            }
-
-
-            }
-            Slider {
-            id: sliderDesaturation
-            }
-
-            }
-
-                RowLayout{
                     Layout.fillWidth: true
-                     Layout.row: 2
-                     Layout.column: 0
-                     Layout.columnSpan: 2
-                Item {
-                    width:  300
-                    height:  300
+                    Layout.row: 1
+                    Layout.column: 0
+                    Layout.columnSpan: 2
+                    Item {
+                        width: 150
+                        height: 150
 
-                    Image {
-                        id:  bugg
-                        source:  "pic_1.jpg"
-                        sourceSize:  Qt.size( parent.width,  parent.height)
-                        smooth:  true
-                        visible:  false
+                        Image {
+
+                            id: bug
+                            source: "pic_1.jpg"
+                            sourceSize: Qt.size(parent.width, parent.height)
+
+                            smooth: true
+                            visible: false
+                        }
+
+                        Desaturate {
+                            anchors.fill: bug
+                            source: bug
+                            desaturation: sliderDesaturation.value
+                        }
+
+
+                    }
+                    Slider {
+                        id: sliderDesaturation
                     }
 
-                    Image {
-                        id:  mask
-                        source:  "pic_2.png"
-                        sourceSize:  Qt.size( parent.width,  parent.height)
-                        smooth:  true
-                        visible:  false
-                    }
-
-                    OpacityMask {
-
-                        anchors.fill:  bugg
-                        source:  bugg
-                        maskSource: mask
-                    }
-
-                }
-                SpinBox{
-                id: mon
-                }
                 }
 
                 RowLayout{
                     Layout.fillWidth: true
-                     Layout.row: 3
-                     Layout.column: 0
-                     Layout.columnSpan: 2
-                Image{ // картинка
-                id: image
-                sourceSize.width: 200
-                sourceSize.height: 200
-                source: "pic_1.jpg" // картинка к которой применяется эффект
-                visible: false
+                    Layout.row: 2
+                    Layout.column: 0
+                    Layout.columnSpan: 2
+                    Item {
+                        width:  300
+                        height:  300
+
+                        Image {
+                            id:  bugg
+                            source:  "pic_1.jpg"
+                            sourceSize:  Qt.size( parent.width,  parent.height)
+                            smooth:  true
+                            visible:  false
+                        }
+
+                        Image {
+                            id:  mask
+                            //source:  "pic_2.png"
+                            sourceSize:  Qt.size( parent.width,  parent.height)
+                            //smooth:  true
+                            visible:  false
+                        }
+
+                        OpacityMask {
+
+                            anchors.fill:  bugg
+                            source:  bugg
+                            maskSource: mask
+
+                        }
+
+                    }
+                    Button{
+                        id: button1
+                        onClicked: {
+                            mask.source = "pic_2.png"
+                            //OpacityMask.maskSource = mask
+                        }
+
+                    }
+
                 }
-                MaskedBlur { // эффект размытия градиентом
-                Layout.preferredHeight: image.height
-                Layout.preferredWidth: image.width
-                source: image
-                maskSource: linearGradient
-                radius: sliderMasked.position*50 // зависисимость степени размытия от позиции слайдера
-                samples: 25
-                Layout.alignment: Qt.AlignCenter
+
+                RowLayout{
+                    Layout.fillWidth: true
+                    Layout.row: 3
+                    Layout.column: 0
+                    Layout.columnSpan: 2
+                    Image{ // картинка
+                        id: image
+                        sourceSize.width: 200
+                        sourceSize.height: 200
+                        source: "pic_1.jpg" // картинка к которой применяется эффект
+                        visible: false
+                    }
+                    MaskedBlur { // эффект размытия градиентом
+                        Layout.preferredHeight: image.height
+                        Layout.preferredWidth: image.width
+                        source: image
+                        maskSource: linearGradient
+                        radius: sliderMasked.position*50 // зависисимость степени размытия от позиции слайдера
+                        samples: 25
+                        Layout.alignment: Qt.AlignCenter
+                    }
+
+                    LinearGradient { // линейный градиент
+                        id: linearGradient
+                        Layout.preferredHeight: image.height
+                        Layout.preferredWidth: image.width
+                        opacity: 0.0
+                        source: Image{
+                            source: "pic_2.png" // это сама масkа которая применяется
+                        }
+                        gradient: Gradient {
+                            GradientStop { position: 0.2; color: "#ffffffff" }
+                            GradientStop { position: 0.5; color: "#00ffffff" }
+                        }
+                        start: Qt.point(0, 0) // эффект до середины картинки
+                        end: Qt.point(400, 0)
+                        //visible: false
+                    }
+
+                    Slider{ // слайдер
+                        id: sliderMasked
+                        from: 1.0
+                        to: 4.0
+                    }
                 }
-
-                LinearGradient { // линейный градиент
-                id: linearGradient
-                Layout.preferredHeight: image.height
-                Layout.preferredWidth: image.width
-                opacity: 0.0
-                source: Image{
-                source: "pic_2.png" // это сама масkа которая применяется
-                }
-                gradient: Gradient {
-                GradientStop { position: 0.2; color: "#ffffffff" }
-                GradientStop { position: 0.5; color: "#00ffffff" }
-                }
-                start: Qt.point(0, 0) // эффект до середины картинки
-                end: Qt.point(400, 0)
-                //visible: false
-                }
-
-                Slider{ // слайдер
-                id: sliderMasked
-                from: 1.0
-                to: 4.0
-                }
-                }
-
-//            RowLayout{
-//                Layout.fillWidth: true
-//                Layout.row: 1
-//                Layout.column: 0
-//                Layout.columnSpan: 2
-//                Image {
-
-//                id: bugg
-//                source: "pic_1.jpg"
-//                sourceSize: Qt.size(parent.width, parent.height)
-
-//                smooth: true
-//                visible: false
-//                }
-
-//                Desaturate {
-//                anchors.fill: bugg
-//                source: bugg
-//                desaturation: sliderDesaturationn.value
-//                }
-//                Slider {
-//                id: sliderDesaturationn
-//                }
-
-
-
-
-//            }
-
-//            RowLayout{
-//                Layout.fillWidth: true
-//                Layout.row: 2
-//                Layout.column: 0
-//                Layout.columnSpan: 2
-//                Image {
-
-//                id: buggg
-//                source: "pic_1.jpg"
-//                sourceSize: Qt.size(parent.width, parent.height)
-
-//                smooth: true
-//                visible: false
-//                }
-
-//                Desaturate {
-//                anchors.fill: buggg
-//                source: buggg
-//                desaturation: sliderDesaturationnn.value
-//                }
-//                Slider {
-//                id: sliderDesaturationnn
-//                }
-//                }
 
             }
 
 
-}
+        }
 
 
 
 
-//            GridLayout {
-//                //anchors.fill: parent
-//                columns: 3 //колонка
-//                //rows: 10 //строчка
+        //            GridLayout {
+        //                //anchors.fill: parent
+        //                columns: 3 //колонка
+        //                //rows: 10 //строчка
 
-//                Image {
-//                    id: image1
-//                    //Layout.fillWidth: 50
-//                    //Layout.fillHeight: 50
-//                    source: "pic_1.jpg"
-//                    Layout.row: 0
-//                    Layout.column: 0
-//                    Layout.fillWidth: 50
-//                    Layout.fillHeight: 50
-//                }
-//                LinearGradient{
-//                id: mask
-//                anchors.fill: image1
-//                gradient: Gradient {
-//                    GradientStop { position: 0.3; color: "#ffffffff" }
-//                    GradientStop { position: 0.5; color: "#00ffffff" }
-//                }
-//                start: Qt.point(0, 0)
-//                          end: Qt.point(300, 0)
-//                          visible: false
-//                }
-//                MaskedBlur {
-//                anchors.fill: image1 //eссылка на картинку
-//                source: image1
-//                maskSource: mask
-//                radius: 16
-//                samples: 24
-//                }
-//                Slider{
-//                    Layout.row: 2
-//                    Layout.column: 1
-//}
-//                Image {
-//                id: image2
-//                width: 100
-//                height: 100
-//                source: "pic_1.png"
-//                Layout.row: 1
-//                Layout.column: 0
-//            }
-//                Image {
-//                id: image3
-//                width: 200
-//                height: 200
-//                source: "pic_1.png"
-//                Layout.row: 2
-//                Layout.column: 0
-//            }
-            //}
+        //                Image {
+        //                    id: image1
+        //                    //Layout.fillWidth: 50
+        //                    //Layout.fillHeight: 50
+        //                    source: "pic_1.jpg"
+        //                    Layout.row: 0
+        //                    Layout.column: 0
+        //                    Layout.fillWidth: 50
+        //                    Layout.fillHeight: 50
+        //                }
+        //                LinearGradient{
+        //                id: mask
+        //                anchors.fill: image1
+        //                gradient: Gradient {
+        //                    GradientStop { position: 0.3; color: "#ffffffff" }
+        //                    GradientStop { position: 0.5; color: "#00ffffff" }
+        //                }
+        //                start: Qt.point(0, 0)
+        //                          end: Qt.point(300, 0)
+        //                          visible: false
+        //                }
+        //                MaskedBlur {
+        //                anchors.fill: image1 //eссылка на картинку
+        //                source: image1
+        //                maskSource: mask
+        //                radius: 16
+        //                samples: 24
+        //                }
+        //                Slider{
+        //                    Layout.row: 2
+        //                    Layout.column: 1
+        //}
+        //                Image {
+        //                id: image2
+        //                width: 100
+        //                height: 100
+        //                source: "pic_1.png"
+        //                Layout.row: 1
+        //                Layout.column: 0
+        //            }
+        //                Image {
+        //                id: image3
+        //                width: 200
+        //                height: 200
+        //                source: "pic_1.png"
+        //                Layout.row: 2
+        //                Layout.column: 0
+        //            }
+        //}
 
-            //Tumbler{
-               //Layout.row: 2
-               // Layout.column: 1
-            //}
-           // SpinBox{
-               // Layout.row: 3
-               // Layout.column: 2
-           // }
+        //Tumbler{
+        //Layout.row: 2
+        // Layout.column: 1
+        //}
+        // SpinBox{
+        // Layout.row: 3
+        // Layout.column: 2
+        // }
 
 
 
@@ -612,10 +565,10 @@ ApplicationWindow {
                 //anchors.fill: parent
                 columns: 3
                 Button{
-                id: buttt
+                    id: buttt
                 }
                 Button{
-                id: butttt
+                    id: butttt
                 }
 
             }

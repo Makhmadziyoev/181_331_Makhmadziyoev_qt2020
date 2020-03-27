@@ -393,6 +393,11 @@ ApplicationWindow {
 
             }
 
+                RowLayout{
+                    Layout.fillWidth: true
+                     Layout.row: 2
+                     Layout.column: 0
+                     Layout.columnSpan: 2
                 Item {
                     width:  300
                     height:  300
@@ -424,9 +429,53 @@ ApplicationWindow {
                 SpinBox{
                 id: mon
                 }
+                }
 
+                RowLayout{
+                    Layout.fillWidth: true
+                     Layout.row: 3
+                     Layout.column: 0
+                     Layout.columnSpan: 2
+                Image{ // картинка
+                id: image
+                sourceSize.width: 200
+                sourceSize.height: 200
+                source: "pic_1.jpg" // картинка к которой применяется эффект
+                visible: false
+                }
+                MaskedBlur { // эффект размытия градиентом
+                Layout.preferredHeight: image.height
+                Layout.preferredWidth: image.width
+                source: image
+                maskSource: linearGradient
+                radius: sliderMasked.position*50 // зависисимость степени размытия от позиции слайдера
+                samples: 25
+                Layout.alignment: Qt.AlignCenter
+                }
 
+                LinearGradient { // линейный градиент
+                id: linearGradient
+                Layout.preferredHeight: image.height
+                Layout.preferredWidth: image.width
+                opacity: 0.0
+                source: Image{
+                source: "pic_2.png" // это сама масkа которая применяется
+                }
+                gradient: Gradient {
+                GradientStop { position: 0.2; color: "#ffffffff" }
+                GradientStop { position: 0.5; color: "#00ffffff" }
+                }
+                start: Qt.point(0, 0) // эффект до середины картинки
+                end: Qt.point(400, 0)
+                //visible: false
+                }
 
+                Slider{ // слайдер
+                id: sliderMasked
+                from: 1.0
+                to: 4.0
+                }
+                }
 
 //            RowLayout{
 //                Layout.fillWidth: true

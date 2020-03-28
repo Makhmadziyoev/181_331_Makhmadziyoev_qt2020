@@ -3,6 +3,7 @@ import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 import QtQuick.Controls.Material 2.0
 import QtGraphicalEffects 1.14
+import QtMultimedia 5.14
 
 ApplicationWindow {
     visible: true
@@ -16,7 +17,7 @@ ApplicationWindow {
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
-        Page {
+        Page { // 1 ЛАБОРАТОРНАЯ
             //width: 600
             //height: 400
             header: Label {
@@ -25,6 +26,7 @@ ApplicationWindow {
                 font.pixelSize: Qt.application.font.pixelSize * 3
                 padding: 10
                 font.bold: true
+
             }
             GridLayout {
                 anchors.fill: parent
@@ -223,7 +225,7 @@ ApplicationWindow {
                 //}
             }
         }
-        Page {
+        Page { // 1 ЛАБОРАТОРНАЯ АНЧОРС
             width: 600
             height: 400
             header: Label {
@@ -351,7 +353,168 @@ ApplicationWindow {
                 }
             }
         }
-        Page {
+        Page { // 2 ЛАБОРАТОРНАЯ
+            header: Label {
+                GridLayout{
+                    anchors.fill: parent
+                    columns: 3
+                    RowLayout{
+                        Layout.fillWidth: true
+                        Layout.column: 2
+                        Layout.row: 0
+                        Layout.columnSpan: 3
+
+                        Item{
+                            Layout.fillWidth: true
+                        }
+                        RadioButton{
+                            id: radiobut
+                            text: "Видео"
+                        }
+
+                        RadioButton{
+                            id: radiobut2
+                            text: "Camera"
+                        }
+                        Item{
+                            Layout.fillWidth: true
+                        }
+                    }
+                }
+
+
+            }
+
+            GridLayout{
+                anchors.fill: parent
+                columns: 3
+
+
+                RowLayout{
+                    visible: {if(radiobut.checked){true}else{false}}
+                    Layout.fillWidth: true
+                    //Layout.columnSpan: 4
+                    Layout.column: 2
+                    Layout.row: 3
+
+                    MediaPlayer {
+                        id: player
+                        source: "War.mp4"
+                        volume: vol.value
+                        onPositionChanged: {
+                            timeline.sync = true
+                            timeline.value = player.position
+                            timeline.sync = false
+                        }
+
+                    }
+                    VideoOutput {
+                        id: vid
+                        source: player
+                    }
+
+
+                }
+
+                RowLayout{ //Таймлайн видео
+                    visible: {if(radiobut.checked){true}else{false}}
+                    Layout.fillWidth: true
+                    //Layout.columnSpan: 1
+                    Layout.column: 2
+                    Layout.row: 4
+                    Slider{
+                        id: prosmotr
+                        to: player.duration
+                        property bool sync: false
+                        onValueChanged: {if(!sync){player.seek(value)}}
+
+                        Layout.fillWidth: true
+                    }
+                }
+                RowLayout{
+                    visible: {if(radiobut.checked){true}else{false}}
+
+                    Layout.fillWidth: true
+                    //Layout.columnSpan: 1
+                    Layout.column: 2
+                    Layout.row: 5
+                    Item{
+                        Layout.fillWidth: true
+                    }
+                    Button{
+                        id: ut1
+                        text: "play"
+                        onClicked: player.play()
+                    }
+                    Slider {
+                        id: vol
+                        from: 0
+                        value: 0.5
+                        to:1
+
+                    }
+                    Item{
+                        Layout.fillWidth: true
+                    }
+                }
+
+            }
+
+
+
+            GridLayout {
+                RowLayout { //Camera
+                    Layout.fillWidth: true
+                    Layout.columnSpan: 4
+                    Layout.column: 1
+                    Layout.row: 1
+                    visible: {if(radiobut2.checked){true}else{false}}
+
+                    Item {
+                        width: 640
+                        height: 360
+
+                        Camera {
+                            id: camera
+
+                            imageProcessing.whiteBalanceMode: CameraImageProcessing.WhiteBalanceFlash
+
+                            exposure {
+                                exposureCompensation: -1.0
+                                exposureMode: Camera.ExposurePortrait
+                            }
+
+                            flash.mode: Camera.FlashRedEyeReduction
+
+                            imageCapture {
+                                onImageCaptured: {
+                                    photoPreview.source = preview  // Show the preview in an Image
+                                }
+                            }
+                        }
+
+                        VideoOutput {
+                            source: camera
+                            anchors.fill: parent
+                            focus : visible // to receive focus and capture key events when visible
+                        }
+
+                        Image {
+                            id: photoPreview
+                        }
+                    }
+
+
+                }
+            }
+
+
+
+
+
+
+        }
+        Page { // 3 ЛАБОРАТОРНАЯ
             header: Label {
                 color: "#9020b5"
                 text: qsTr("Lab3")
@@ -488,98 +651,71 @@ ApplicationWindow {
 
 
         }
+        Page { // 4 ЛАБОРАТОРНАЯ
 
-
-
-
-        //            GridLayout {
-        //                //anchors.fill: parent
-        //                columns: 3 //колонка
-        //                //rows: 10 //строчка
-
-        //                Image {
-        //                    id: image1
-        //                    //Layout.fillWidth: 50
-        //                    //Layout.fillHeight: 50
-        //                    source: "pic_1.jpg"
-        //                    Layout.row: 0
-        //                    Layout.column: 0
-        //                    Layout.fillWidth: 50
-        //                    Layout.fillHeight: 50
-        //                }
-        //                LinearGradient{
-        //                id: mask
-        //                anchors.fill: image1
-        //                gradient: Gradient {
-        //                    GradientStop { position: 0.3; color: "#ffffffff" }
-        //                    GradientStop { position: 0.5; color: "#00ffffff" }
-        //                }
-        //                start: Qt.point(0, 0)
-        //                          end: Qt.point(300, 0)
-        //                          visible: false
-        //                }
-        //                MaskedBlur {
-        //                anchors.fill: image1 //eссылка на картинку
-        //                source: image1
-        //                maskSource: mask
-        //                radius: 16
-        //                samples: 24
-        //                }
-        //                Slider{
-        //                    Layout.row: 2
-        //                    Layout.column: 1
-        //}
-        //                Image {
-        //                id: image2
-        //                width: 100
-        //                height: 100
-        //                source: "pic_1.png"
-        //                Layout.row: 1
-        //                Layout.column: 0
-        //            }
-        //                Image {
-        //                id: image3
-        //                width: 200
-        //                height: 200
-        //                source: "pic_1.png"
-        //                Layout.row: 2
-        //                Layout.column: 0
-        //            }
-        //}
-
-        //Tumbler{
-        //Layout.row: 2
-        // Layout.column: 1
-        //}
-        // SpinBox{
-        // Layout.row: 3
-        // Layout.column: 2
-        // }
-
-
-
-
-
-        Page {
             GridLayout {
-                //anchors.fill: parent
-                columns: 3
-                Button{
-                    id: buttt
-                }
-                Button{
-                    id: butttt
+                anchors.fill: parent
+                //columns: 3
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.columnSpan: 3
+                    Layout.column: 0
+                    Layout.row: 6
+                    Item{
+                        Layout.fillWidth: true
+                    }
+
+                    RadioButton{
+                        id: radbut114
+                        checked: true
+                    }
+                    RadioButton {
+                        id: radbut224
+                        checked: true
+                    }
+                    RadioButton{
+                        id: radbut334
+                        checked: false
+                    }
+                    Button{
+                        id: butt24
+                        text: "MегаФон"
+                        font.family: "Tahoma"
+                        font.bold: true
+                        font.pixelSize: 30
+                        background: Rectangle {
+                            color: butt2.down ? "white":"white"
+                            radius: 10
+                        }
+                        contentItem: Text {
+                            text: butt2.text
+                            font: butt2.font
+                            color: butt2.down ? "green" : "#9020b5"
+                        }
+                    }
+                    RadioButton{
+                        id: radbut14
+                        checked: true
+                    }
+                    RadioButton {
+                        id: radbut24
+                        checked: true
+                    }
+                    RadioButton{
+                        id: radbut34
+                        checked: false
+                    }
+                    Item{
+                        Layout.fillWidth: true
+                    }
                 }
 
             }
-            TextField{
-            }
+
 
 
         }
     }
-
-
     Drawer {
         //anchors.fill:parent
         width:0.66 * parent.width
@@ -632,8 +768,14 @@ ApplicationWindow {
         }
 
         TabButton {
+            text: qsTr("Lab 2")
+        }
+
+        TabButton {
             text: qsTr("Lab 3") }
         TabButton {
             text: qsTr("Lab 4") }
     }
+
+
 }

@@ -6,5 +6,6 @@
         <file>qtquickcontrols2.conf</file>
         <file>pic_1.jpg</file>
         <file>pic_2.png</file>
+        <file>War.mp4</file>
     </qresource>
 </RCC>

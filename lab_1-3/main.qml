@@ -397,14 +397,14 @@ ApplicationWindow {
                     Layout.column: 2
                     Layout.row: 3
 
-                    MediaPlayer {
+                    MediaPlayer {             // МЕДИАПЛЕЕР
                         id: player
                         source: "War.mp4"
                         volume: vol.value
                         onPositionChanged: {
-                            timeline.sync = true
-                            timeline.value = player.position
-                            timeline.sync = false
+                        timeline.sync = true
+                        timeline.value = player.position
+                        timeline.sync = false
                         }
 
                     }
@@ -416,18 +416,17 @@ ApplicationWindow {
 
                 }
 
-                RowLayout{ //Таймлайн видео
+                RowLayout{                                       //Таймлайн видео
                     visible: {if(radiobut.checked){true}else{false}}
                     Layout.fillWidth: true
                     //Layout.columnSpan: 1
                     Layout.column: 2
                     Layout.row: 4
-                    Slider{
+                    Slider{                                     // таймлапс слайдер
                         id: prosmotr
                         to: player.duration
                         property bool sync: false
                         onValueChanged: {if(!sync){player.seek(value)}}
-
                         Layout.fillWidth: true
                     }
                 }
@@ -444,15 +443,21 @@ ApplicationWindow {
                     Button{
                         id: ut1
                         text: "play"
-                        onClicked: player.play()
+                        onClicked: player.playbackState === MediaPlayer.PlayingState ?
+                        player.pause() : player.play()
+                        //onClicked: {if(player.play()){true} else {false} (player.pause())  }
+                        //onClicked: player.playing()
+                    }
+                    Text {
+                    text: "Громкость"
                     }
                     Slider {
                         id: vol
                         from: 0
                         value: 0.5
                         to:1
-
                     }
+
                     Item{
                         Layout.fillWidth: true
                     }
@@ -462,20 +467,26 @@ ApplicationWindow {
 
 
 
-            GridLayout {
+            GridLayout { //Camera
+                anchors.fill: parent
+                columns: 3
                 RowLayout { //Camera
                     Layout.fillWidth: true
-                    Layout.columnSpan: 4
-                    Layout.column: 1
-                    Layout.row: 1
+                    //Layout.columnSpan: 4
+                    Layout.column: 2
+                    Layout.row: 2
                     visible: {if(radiobut2.checked){true}else{false}}
-
-                    Item {
-                        width: 640
+                    Item{
+                        Layout.fillWidth: true
+                    }
+                    Item{
+                        width: 440
                         height: 360
 
                         Camera {
                             id: camera
+
+
 
                             imageProcessing.whiteBalanceMode: CameraImageProcessing.WhiteBalanceFlash
 
@@ -488,9 +499,10 @@ ApplicationWindow {
 
                             imageCapture {
                                 onImageCaptured: {
-                                    photoPreview.source = preview  // Show the preview in an Image
+                                    savedphoto.source = preview  // Show the preview in an Image
                                 }
                             }
+
                         }
 
                         VideoOutput {
@@ -503,8 +515,38 @@ ApplicationWindow {
                             id: photoPreview
                         }
                     }
+                    Item{
+                        Layout.fillWidth: true
+                    }
 
+                }
+                RowLayout{
+                    Layout.fillWidth: true
+                    //Layout.columnSpan: 4
+                    Layout.column: 2
+                    Layout.row: 3
+                    visible: {if(radiobut2.checked){true}else{false}}
+                Button{
+                id: photo
+                text: "Photo"
+                 onClicked: camera.imageCapture.captureToLocation("F:/git_qt/181_331_Makhmadziyoev_qt2020/lab_1-3/photo")
+                }
+                Button{
+                id: video
+                text: "video"
+                }
 
+                Item{
+                    Layout.fillWidth: true
+                }
+                Item {
+                width: 100
+                height: 60
+                Image {
+                    id: savedphoto
+                    anchors.fill: parent
+                }
+                }
                 }
             }
 
@@ -529,7 +571,7 @@ ApplicationWindow {
                     Layout.column: 0
                     Layout.columnSpan: 2
                     Item {
-                        width: 150
+                        width: 200
                         height: 150
 
                         Image {
@@ -562,8 +604,8 @@ ApplicationWindow {
                     Layout.column: 0
                     Layout.columnSpan: 2
                     Item {
-                        width:  300
-                        height:  300
+                        width:  200
+                        height:  150
 
                         Image {
                             id:  bugg
@@ -592,6 +634,7 @@ ApplicationWindow {
                     }
                     Button{
                         id: button1
+                        text: "Маска"
                         onClicked: {
                             mask.source = "pic_2.png"
                             //OpacityMask.maskSource = mask
@@ -609,10 +652,11 @@ ApplicationWindow {
                     Image{ // картинка
                         id: image
                         sourceSize.width: 200
-                        sourceSize.height: 200
+                        sourceSize.height: 150
                         source: "pic_1.jpg" // картинка к которой применяется эффект
                         visible: false
                     }
+
                     MaskedBlur { // эффект размытия градиентом
                         Layout.preferredHeight: image.height
                         Layout.preferredWidth: image.width
@@ -640,77 +684,27 @@ ApplicationWindow {
                         //visible: false
                     }
 
+
+                }
+
+                RowLayout{
+                    Layout.fillWidth: true
+                    Layout.row: 3
+                    Layout.column: 1
+                    Layout.columnSpan: 2
                     Slider{ // слайдер
                         id: sliderMasked
                         from: 1.0
                         to: 4.0
                     }
-                }
 
+
+                }
             }
 
 
         }
         Page { // 4 ЛАБОРАТОРНАЯ
-
-            GridLayout {
-                anchors.fill: parent
-                //columns: 3
-                RowLayout {
-                    Layout.fillWidth: true
-                    Layout.columnSpan: 3
-                    Layout.column: 0
-                    Layout.row: 6
-                    Item{
-                        Layout.fillWidth: true
-                    }
-
-                    RadioButton{
-                        id: radbut114
-                        checked: true
-                    }
-                    RadioButton {
-                        id: radbut224
-                        checked: true
-                    }
-                    RadioButton{
-                        id: radbut334
-                        checked: false
-                    }
-                    Button{
-                        id: butt24
-                        text: "MегаФон"
-                        font.family: "Tahoma"
-                        font.bold: true
-                        font.pixelSize: 30
-                        background: Rectangle {
-                            color: butt2.down ? "white":"white"
-                            radius: 10
-                        }
-                        contentItem: Text {
-                            text: butt2.text
-                            font: butt2.font
-                            color: butt2.down ? "green" : "#9020b5"
-                        }
-                    }
-                    RadioButton{
-                        id: radbut14
-                        checked: true
-                    }
-                    RadioButton {
-                        id: radbut24
-                        checked: true
-                    }
-                    RadioButton{
-                        id: radbut34
-                        checked: false
-                    }
-                    Item{
-                        Layout.fillWidth: true
-                    }
-                }
-
-            }
 
 
 

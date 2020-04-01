@@ -354,7 +354,7 @@ ApplicationWindow {
             }
         }
         Page { // 2 ЛАБОРАТОРНАЯ
-            header: Label {
+            header: Label { // ПЕРЕКЛЮЧЕНИЕ МЕЖДУ ПЛЕЕРОМ И КАМЕРОЙ
                 GridLayout{
                     anchors.fill: parent
                     columns: 3
@@ -385,7 +385,7 @@ ApplicationWindow {
 
             }
 
-            GridLayout{
+            GridLayout{   // МЕДИАПЛЕЕР
                 anchors.fill: parent
                 columns: 3
 
@@ -402,9 +402,10 @@ ApplicationWindow {
                         source: "War.mp4"
                         volume: vol.value
                         onPositionChanged: {
-                        timeline.sync = true
-                        timeline.value = player.position
-                        timeline.sync = false
+
+                            prosmotr.sync = true
+                            prosmotr.value = player.position
+                            prosmotr.sync = false
                         }
 
                     }
@@ -444,12 +445,12 @@ ApplicationWindow {
                         id: ut1
                         text: "play"
                         onClicked: player.playbackState === MediaPlayer.PlayingState ?
-                        player.pause() : player.play()
+                                       player.pause() : player.play()
                         //onClicked: {if(player.play()){true} else {false} (player.pause())  }
                         //onClicked: player.playing()
                     }
                     Text {
-                    text: "Громкость"
+                        text: "Громкость"
                     }
                     Slider {
                         id: vol
@@ -465,9 +466,7 @@ ApplicationWindow {
 
             }
 
-
-
-            GridLayout { //Camera
+            GridLayout {   //Camera
                 anchors.fill: parent
                 columns: 3
                 RowLayout { //Camera
@@ -486,7 +485,11 @@ ApplicationWindow {
                         Camera {
                             id: camera
 
-
+                            videoRecorder.audioEncodingMode: CameraRecorder.ConstantBitrateEncoding;
+                            videoRecorder.audioBitRate:   128000
+                            videoRecorder.mediaContainer:   "mp4"
+                            videoRecorder.outputLocation: "F:/git_qt/181_331_Makhmadziyoev_qt2020/lab_1-3/video"
+                            videoRecorder.frameRate: 30.000
 
                             imageProcessing.whiteBalanceMode: CameraImageProcessing.WhiteBalanceFlash
 
@@ -526,27 +529,27 @@ ApplicationWindow {
                     Layout.column: 2
                     Layout.row: 3
                     visible: {if(radiobut2.checked){true}else{false}}
-                Button{
-                id: photo
-                text: "Photo"
-                 onClicked: camera.imageCapture.captureToLocation("F:/git_qt/181_331_Makhmadziyoev_qt2020/lab_1-3/photo")
-                }
-                Button{
-                id: video
-                text: "video"
-                }
+                    Button{
+                        id: photo
+                        text: "Photo"
+                        onClicked: camera.imageCapture.captureToLocation("F:/git_qt/181_331_Makhmadziyoev_qt2020/lab_1-3/photo")
+                    }
+                    Button{
+                        id: video
+                        text: "video"
+                    }
 
-                Item{
-                    Layout.fillWidth: true
-                }
-                Item {
-                width: 100
-                height: 60
-                Image {
-                    id: savedphoto
-                    anchors.fill: parent
-                }
-                }
+                    Item{
+                        Layout.fillWidth: true
+                    }
+                    Item {
+                        width: 100
+                        height: 60
+                        Image {
+                            id: savedphoto
+                            anchors.fill: parent
+                        }
+                    }
                 }
             }
 

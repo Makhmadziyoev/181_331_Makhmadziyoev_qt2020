@@ -417,7 +417,7 @@ ApplicationWindow {
 
                 }
 
-                RowLayout{                                       //Таймлайн видео
+                RowLayout{ //Таймлайн видео
                     visible: {if(radiobut.checked){true}else{false}}
                     Layout.fillWidth: true
                     //Layout.columnSpan: 1
@@ -552,12 +552,6 @@ ApplicationWindow {
                     }
                 }
             }
-
-
-
-
-
-
         }
         Page { // 3 ЛАБОРАТОРНАЯ
             header: Label {
@@ -576,31 +570,23 @@ ApplicationWindow {
                     Item {
                         width: 200
                         height: 150
-
                         Image {
-
                             id: bug
                             source: "pic_1.jpg"
                             sourceSize: Qt.size(parent.width, parent.height)
-
                             smooth: true
                             visible: false
                         }
-
                         Desaturate {
                             anchors.fill: bug
                             source: bug
                             desaturation: sliderDesaturation.value
                         }
-
-
                     }
                     Slider {
                         id: sliderDesaturation
                     }
-
                 }
-
                 RowLayout{
                     Layout.fillWidth: true
                     Layout.row: 2
@@ -609,7 +595,6 @@ ApplicationWindow {
                     Item {
                         width:  200
                         height:  150
-
                         Image {
                             id:  bugg
                             source:  "pic_1.jpg"
@@ -617,7 +602,6 @@ ApplicationWindow {
                             smooth:  true
                             visible:  false
                         }
-
                         Image {
                             id:  mask
                             //source:  "pic_2.png"
@@ -625,15 +609,11 @@ ApplicationWindow {
                             //smooth:  true
                             visible:  false
                         }
-
                         OpacityMask {
-
                             anchors.fill:  bugg
                             source:  bugg
                             maskSource: mask
-
                         }
-
                     }
                     Button{
                         id: button1
@@ -642,11 +622,8 @@ ApplicationWindow {
                             mask.source = "pic_2.png"
                             //OpacityMask.maskSource = mask
                         }
-
                     }
-
                 }
-
                 RowLayout{
                     Layout.fillWidth: true
                     Layout.row: 3
@@ -659,7 +636,6 @@ ApplicationWindow {
                         source: "pic_1.jpg" // картинка к которой применяется эффект
                         visible: false
                     }
-
                     MaskedBlur { // эффект размытия градиентом
                         Layout.preferredHeight: image.height
                         Layout.preferredWidth: image.width
@@ -669,7 +645,6 @@ ApplicationWindow {
                         samples: 25
                         Layout.alignment: Qt.AlignCenter
                     }
-
                     LinearGradient { // линейный градиент
                         id: linearGradient
                         Layout.preferredHeight: image.height
@@ -686,10 +661,7 @@ ApplicationWindow {
                         end: Qt.point(400, 0)
                         //visible: false
                     }
-
-
                 }
-
                 RowLayout{
                     Layout.fillWidth: true
                     Layout.row: 3
@@ -700,38 +672,155 @@ ApplicationWindow {
                         from: 1.0
                         to: 4.0
                     }
-
-
                 }
             }
-
-
         }
         Page { // 4 ЛАБОРАТОРНАЯ
+            header: Label { //
+                GridLayout{
+                    anchors.fill: parent
+                    columns: 3
+                    RowLayout{
+                        Layout.fillWidth: true
+                        Layout.column: 2
+                        Layout.row: 0
+                        Layout.columnSpan: 3
 
+                        Item{
+                            Layout.fillWidth: true
+                        }
+
+                        Button {
+                        text: "Запросы к серверу по протоколу"
+                        }
+
+                        Item{
+                            Layout.fillWidth: true
+                        }
+                    }
+                }
+
+
+            }
+           GridLayout {
+               anchors.fill: parent
+               columns: 3
+               RowLayout{
+                   //Layout.fillWidth: true
+                   Layout.column: 2
+                   Layout.row: 0
+                   //Layout.columnSpan: 3
+               TextArea{
+                   Layout.fillWidth: true
+                   readOnly: true
+               }
+
+               }
+               RowLayout{
+                   //Layout.fillWidth: true
+                   Layout.column: 3
+                   Layout.row: 2
+                   Layout.columnSpan: 3
+               Button{
+                   text: "ВЫВОД"
+                   Layout.fillWidth: true
+                   onClicked: {
+                       //makeRequest();
+                   }
+               }
+
+               }
+
+
+
+           }
 
 
         }
     }
-    Drawer {
-        //anchors.fill:parent
-        width:0.66 * parent.width
+    Drawer{
+        id: dr1
+        width: parent.width * 0.67
         height: parent.height
-        GridLayout {
+        dragMargin: 20
+        ColumnLayout{
             anchors.fill: parent
-            columns: 1
             Button{
-
+                text: "Lab 1"
+                Layout.row: 0
+                Layout.column: 0
+                Layout.columnSpan: 1
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                background: Rectangle{
+                    color: "#9020b5"
+                }
+                onClicked: {
+                    swipeView.currentIndex = 0;
+                    dr1.close();
+                }
             }
-            Button{}
-            Button{}
-            Switch {
-                onScaleChanged: {
-                    text = "green";
+            Button{
+                text: "Lab 1.2"
+                Layout.row: 1
+                Layout.column: 0
+                Layout.columnSpan: 1
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                background: Rectangle{
+                    color: "#9020b5"
+                }
+                onClicked: {
+                    swipeView.currentIndex = 1;
+                    dr1.close();
+                }
+            }
+            Button{
+                text: "Lab 2"
+                Layout.row: 2
+                Layout.column: 0
+                Layout.columnSpan: 1
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                background: Rectangle{
+                    color: "#9020b5"
+                }
+                onClicked: {
+                    swipeView.currentIndex = 2;
+                    dr1.close();
+                }
+            }
+            Button{
+                text: "Lab 3"
+                Layout.row: 3
+                Layout.column: 0
+                Layout.columnSpan: 1
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                background: Rectangle{
+                    color: "#9020b5"
+                }
+                onClicked: {
+                    swipeView.currentIndex = 3;
+                    dr1.close();
+                }
+            }
+            Button{
+                text: "Lab 4"
+                Layout.row: 4
+                Layout.column: 0
+                Layout.columnSpan: 1
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                background: Rectangle{
+                    color: "#9020b5"
+                }
+                onClicked: {
+                    swipeView.currentIndex = 4;
+                    dr1.close();
                 }
             }
         }
-
     }
 
     footer: TabBar {
@@ -739,39 +828,39 @@ ApplicationWindow {
         currentIndex: swipeView.currentIndex
 
 
-        TabButton {
-            text: qsTr("Lab 1")
-        }
-        TabButton {
-            id: dr
-            text: qsTr("Lab1.1")
-            font.bold: false
-            font.pixelSize: 15
-            background: Rectangle {
-                //color: ""
-                color: dr.down ? "white":"white"
-            }
-            contentItem: Text {
+//        TabButton {
+//            text: qsTr("Lab 1")
+//        }
+//        TabButton {
+//            id: dr
+//            text: qsTr("Lab1.1")
+//            font.bold: false
+//            font.pixelSize: 15
+//            background: Rectangle {
+//                //color: ""
+//                color: dr.down ? "white":"white"
+//            }
+//            contentItem: Text {
 
-                text: dr.text
-                font: dr.font
-                color: dr.down ? "green" : "#9020b5"
-            }
-            Rectangle{
-                anchors.fill: parent
-                color: "#98fb98"
+//                text: dr.text
+//                font: dr.font
+//                color: dr.down ? "green" : "#9020b5"
+//            }
+//            Rectangle{
+//                anchors.fill: parent
+//                color: "#98fb98"
 
-            }
-        }
+//            }
+//        }
 
-        TabButton {
-            text: qsTr("Lab 2")
-        }
+//        TabButton {
+//            text: qsTr("Lab 2")
+//        }
 
-        TabButton {
-            text: qsTr("Lab 3") }
-        TabButton {
-            text: qsTr("Lab 4") }
+//        TabButton {
+//            text: qsTr("Lab 3") }
+//        TabButton {
+//            text: qsTr("Lab 4") }
     }
 
 

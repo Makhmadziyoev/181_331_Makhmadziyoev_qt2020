@@ -6,11 +6,17 @@ import QtGraphicalEffects 1.14
 import QtMultimedia 5.14
 
 ApplicationWindow {
+    signal makeRequest()
     visible: true
     width: 480
     height: 640
     title: qsTr("Tabs")
-
+    Connections{
+        target: qhttpcontroller
+        function onToQML(pString){
+            dash.append(pString);
+        }
+    }
 
     SwipeView {
         id: swipeView
@@ -711,6 +717,7 @@ ApplicationWindow {
                    Layout.row: 0
                    //Layout.columnSpan: 3
                TextArea{
+                   id: dash
                    Layout.fillWidth: true
                    readOnly: true
                }
@@ -725,7 +732,7 @@ ApplicationWindow {
                    text: "ВЫВОД"
                    Layout.fillWidth: true
                    onClicked: {
-                       //makeRequest();
+                       makeRequest();
                    }
                }
 

@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QHttpController qhttpcontroller;
-    qhttpcontroller.getSiteValue();
+    //qhttpcontroller.getSiteValue();
 
     QQmlApplicationEngine engine;
 
@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
     engine.load(url);
 
     QObject * mw = engine.rootObjects().first();
-       QObject::connect (mw, SIGNAL(makeRequest()),
-                         &qhttpcontroller, SLOT(getSiteValue()));
+    QObject::connect (mw, SIGNAL(makeRequest()),
+                      &qhttpcontroller, SLOT(getSiteValue()));
 
     return app.exec();
 }

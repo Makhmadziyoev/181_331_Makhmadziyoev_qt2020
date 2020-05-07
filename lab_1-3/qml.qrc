@@ -1,11 +1,17 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Page1Form.ui.qml</file>
-        <file>Page2Form.ui.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>pic_1.jpg</file>
         <file>pic_2.png</file>
         <file>War.mp4</file>
+        <file>Page1.qml</file>
+        <file>Page1_1.qml</file>
+        <file>Page2.qml</file>
+        <file>Page3.qml</file>
+        <file>Page4.qml</file>
+        <file>Page5.qml</file>
+        <file>znak.png</file>
+        <file>Page6.qml</file>
     </qresource>
 </RCC>

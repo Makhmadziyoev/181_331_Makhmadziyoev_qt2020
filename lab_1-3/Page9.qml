@@ -4,14 +4,10 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Material 2.0
 import QtGraphicalEffects 1.14
 import QtMultimedia 5.14
+import QtCharts 2.0
 
-Page  {
-    id: page6 
-
-
-
-
- }
+Page {
+    id: page9
 
 
-
+}

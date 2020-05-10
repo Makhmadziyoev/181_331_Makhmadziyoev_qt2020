@@ -13,5 +13,7 @@
         <file>Page5.qml</file>
         <file>znak.png</file>
         <file>Page6.qml</file>
+        <file>Page9.qml</file>
+        <file>mail.png</file>
     </qresource>
 </RCC>

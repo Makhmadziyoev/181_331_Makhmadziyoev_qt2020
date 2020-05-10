@@ -15,16 +15,32 @@ Page { // 3 ЛАБОРАТОРНАЯ
     }
     
     GridLayout {
-        RowLayout{ // Desaturate эффект черно-белого
+        anchors.fill: parent
+        columns: 3
+        rows: 4
+
+        RowLayout{ // 1 Desaturate (Обесцветить)
             Layout.fillWidth: true
-            Layout.row: 1
+            Layout.row: 0
             Layout.column: 0
-            Layout.columnSpan: 2
+            //Layout.columnSpan: 2
+
+            Item{
+                Layout.fillWidth: true
+            }
+
             Item {
-                width: 200
+                width: 150
                 height: 150
+
                 Image {
                     id: bug
+                    //                    horizontalAlignment: Image.AlignLeft
+                    //Layout.alignment: Qt.AlignCenter
+                    //                    sourceSize.width: 200
+                    //                    sourceSize.height: 150
+                    //                    width: 150
+                    //                    height: 150
                     source: "pic_1.jpg"
                     sourceSize: Qt.size(parent.width, parent.height)
                     smooth: true
@@ -35,31 +51,57 @@ Page { // 3 ЛАБОРАТОРНАЯ
                     source: bug
                     desaturation: sliderDesaturation.value
                 }
+
             }
+            Item{
+                Layout.fillWidth: true
+            }
+
+        }
+        RowLayout{ // 1 slider 1
+            Layout.fillWidth: true
+            Layout.row: 0
+            Layout.column: 2
             Slider {
                 id: sliderDesaturation
             }
             Text {
-                text: "Desaturate"
+                text: "Desaturate (Обусцветить)"
+            }
+            Item{
+                Layout.fillWidth: true
             }
         }
-        RowLayout{ // OpacityMask Маска
+
+
+        RowLayout{ // 2 OpacityMask (Маска Непрозрачности)
             Layout.fillWidth: true
-            Layout.row: 2
+            Layout.row: 1
             Layout.column: 0
-            Layout.columnSpan: 2
+
+            //Layout.columnSpan: 2
+            Item{
+                Layout.fillWidth: true
+            }
             Item {
-                width:  200
+                width:  150
                 height:  150
                 Image {
                     id:  bugg
+                    //                   horizontalAlignment: Image.AlignLeft
                     source:  "pic_1.jpg"
-                    sourceSize:  Qt.size( parent.width,  parent.height)
+                    sourceSize.width: 200
+                    sourceSize.height: 150
+
+                    //                    width: 150
+                    //                    height: 150
+                    //sourceSize:  Qt.size( parent.width,  parent.height)
                     smooth:  true
                     visible:  false
                 }
                 Image {
                     id:  mask
+                    //Layout.alignment: Qt.AlignCenter
                     //source:  "pic_2.png"
                     sourceSize:  Qt.size( parent.width,  parent.height)
                     //smooth:  true
@@ -71,37 +113,64 @@ Page { // 3 ЛАБОРАТОРНАЯ
                     maskSource: mask
                     invert:invertt.value
                 }
+
             }
+            Item{
+                Layout.fillWidth: true
+            }
+
+        }
+        RowLayout{ // 2 slider 2
+            Layout.fillWidth: true
+            Layout.row: 1
+            Layout.column: 2
+
             Button{
                 id: button1
-                text: "MaskSourse"
+                text: "MaskSourse (Маска Непрозрачности)"
                 onClicked: {
                     mask.source = "pic_2.png"
                     //OpacityMask.maskSource = mask
                 }
-                
+
             }
             CheckBox{
                 id:invertt
                 checked: true
-                text: "Invert"
+                text: "Invert (инвертировать)"
             }
-            
         }
-        
-        RowLayout{ // MaskedBlur эффект размытия градиентом
+
+
+
+        RowLayout{ // 3 MaskedBlur эффект размытия градиентом
             Layout.fillWidth: true
-            Layout.row: 3
+            Layout.row: 2
             Layout.column: 0
-            Layout.columnSpan: 2
-            Image{ // картинка
-                id: image
-                sourceSize.width: 200
-                sourceSize.height: 150
-                source: "pic_1.jpg" // картинка к которой применяется эффект
-                visible: false
+            Layout.rowSpan: 3
+            // Layout.columnSpan: 2
+            //Layout.columnSpan: 1
+
+            Item{
+                Layout.fillWidth: true
             }
-            
+
+            Item {
+                id: im
+                width:  150
+                height:  150
+                Image{ // картинка
+                    id: image
+                    sourceSize: Qt.size(parent.width, parent.height)
+                    //                sourceSize.width: 200
+                    //                sourceSize.height: 150
+                    //                 sourceSize:  Qt.size( parent.width,  parent.height)
+                    source: "pic_1.jpg" // картинка к которой применяется эффект
+                    visible: false
+                }
+            }
+
+
             MaskedBlur { // эффект размытия градиентом
                 Layout.preferredHeight: image.height
                 Layout.preferredWidth: image.width
@@ -110,9 +179,10 @@ Page { // 3 ЛАБОРАТОРНАЯ
                 maskSource: linearGradient
                 radius:radius.position*50 // зависисимость степени размытия от позиции слайдера
                 samples: samplesr.value
-                
-                Layout.alignment: Qt.AlignCenter
             }
+            //Layout.alignment: Qt.AlignCenter
+
+
             LinearGradient { // линейный градиент
                 id: linearGradient
                 Layout.preferredHeight: image.height
@@ -129,30 +199,16 @@ Page { // 3 ЛАБОРАТОРНАЯ
                 end: Qt.point(400, 0)
                 visible: swit.value
             }
-        }
-        RowLayout{ // слайдер
-            Layout.fillWidth: true
-            Layout.row: 5
-            Layout.column: 1
-            Layout.columnSpan: 2
-            
-            //                    Slider{ // слайдер
-            //                        id: sliderMasked
-            
-            //                        from: 1.0
-            //                        to: 4.0
-            //                    }
-            
-            Switch {
-                id: swit
-                text: "maskSource"
+            Item{
+                Layout.fillWidth: true
             }
+
         }
-        RowLayout{ // слайдер
+        RowLayout{ // 3 слайдер  Radius
             Layout.fillWidth: true
-            Layout.row: 3
-            Layout.column: 1
-            Layout.columnSpan: 2
+            Layout.row: 2
+            Layout.column: 2
+            //Layout.columnSpan: 2
             Slider{ // слайдер
                 id: radius
                 from: 1.0
@@ -162,21 +218,22 @@ Page { // 3 ЛАБОРАТОРНАЯ
                 text:"Radius"
             }
         }
-        RowLayout{ // слайдер
+        RowLayout{ // 3 слайдер  Samples
             Layout.fillWidth: true
-            Layout.row: 4
-            Layout.column: 1
-            Layout.columnSpan: 2
+            Layout.row: 3
+            Layout.column: 2
+            //Layout.columnSpan: 2
             Slider{ // слайдер
                 id: samplesr
                 from: 1.0
                 to: 4.0
             }
-            
+
             Text {
                 text:"Samples"
             }
             
+
             
             //                    RadioButton{
             //                    id:maskbl
@@ -185,5 +242,35 @@ Page { // 3 ЛАБОРАТОРНАЯ
             //                    id:maskbl1
             //                    }
         }
+        RowLayout {// 3 chechbox Masksource
+            Layout.fillWidth: true
+            Layout.row: 4
+            Layout.column: 2
+            CheckBox {
+                id: swit
+                checked: true
+                text: "maskSource"
+            }
+        }
+
+        //        RowLayout{ // Switch masksource
+        //            Layout.fillWidth: true
+        //            Layout.row: 3 //строка
+        //            Layout.column: 1 // колонка
+        //            Layout.columnSpan: 2
+
+        //            //                    Slider{ // слайдер
+        //            //                        id: sliderMasked
+
+        //            //                        from: 1.0
+        //            //                        to: 4.0
+        //            //                    }
+
+        //            Switch {
+        //                id: swit
+        //                text: "maskSource"
+        //            }
+        //        }
     }
 }
+

@@ -80,7 +80,7 @@ Page { // 4 ЛАБОРАТОРНАЯ
                     anchors.fill: parent
                     TextArea{
                         id: dash
-                        textFormat: Text.RichText
+                        textFormat: Text.PlainText
                         width: 380
                         height: 250
                         Layout.fillWidth: true

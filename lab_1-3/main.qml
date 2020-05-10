@@ -39,6 +39,9 @@ ApplicationWindow {
         Page6 {
             id: page6
         }
+        Page9 {
+            id: page9
+        }
 
 
     }
@@ -109,6 +112,7 @@ ApplicationWindow {
                     dr1.close();
                 }
             }
+
             Button{ // 4 lab
                 text: "Lab 4"
                 Layout.row: 4

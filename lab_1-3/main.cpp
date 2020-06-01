@@ -4,6 +4,7 @@
 #include "qhttpcontroller.h"
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include "mailmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,13 +12,16 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QHttpController qhttpcontroller;
-    //qhttpcontroller.getSiteValue();
+    qhttpcontroller.getSiteValue();
 
     QQmlApplicationEngine engine;
 
     QQmlContext *context = engine.rootContext();
     context->setContextProperty("qhttpcontroller", &qhttpcontroller); // поместить с++ объект в область видимости движка qml
 
+    context->setContextProperty("mail_model", qhttpcontroller.mail_model); //Перемещаемая модель, которой присваиваем имя
+    context->setContextProperty("qhttpcontroller", &qhttpcontroller);
+    //преобразование пути стартовой страницы из char в Qurl
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -27,9 +31,22 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
+    QObject::connect(engine.rootObjects().first(), SIGNAL(restRequest()),
+    &qhttpcontroller, SLOT(restRequest()));
+
+    QObject::connect(engine.rootObjects().first(), SIGNAL(hashMD5(QString)),
+    &qhttpcontroller, SLOT(hashMD5(QString)));
+
+    QObject::connect(engine.rootObjects().first(), SIGNAL(success(QString)),
+        &qhttpcontroller, SLOT(success(QString)));
+
+
     QObject * mw = engine.rootObjects().first();
     QObject::connect (mw, SIGNAL(makeRequest()),
                       &qhttpcontroller, SLOT(getSiteValue()));
+
+
+
 
     return app.exec();
 }

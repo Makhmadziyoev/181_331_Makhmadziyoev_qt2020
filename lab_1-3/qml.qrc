@@ -15,5 +15,7 @@
         <file>Page6.qml</file>
         <file>Page9.qml</file>
         <file>mail.png</file>
+        <file>Page7.qml</file>
+        <file>elma.jpg</file>
     </qresource>
 </RCC>

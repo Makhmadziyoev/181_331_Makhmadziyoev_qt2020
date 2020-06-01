@@ -8,7 +8,7 @@ import QtWebView 1.14
 
 Page { // 5 ЛАБОРАТОРНАЯ
     id: page5
-    Connections{
+    Connections{ //1
         target: qhttpcontroller
         function onToQML3(str1, str2){
             brow.visible = false;
@@ -16,10 +16,12 @@ Page { // 5 ЛАБОРАТОРНАЯ
             txtarea1.visible = false;
             txtarea2.text = str1;
             text3.text = str2;
+            buttback8.visible = false;
+
         }
     }
 
-    Connections{
+    Connections{ //2
         target: qhttpcontroller
         function onToQML4(){
             brow.visible = false;
@@ -178,6 +180,24 @@ Page { // 5 ЛАБОРАТОРНАЯ
                             }
 
                         }
+                        Button{ // Показать данные
+                            id:mailButton
+                            Layout.leftMargin: 250
+                            Layout.topMargin: 15
+                            background: Rectangle {
+                                color: mailButton.down ? "#0000ff":"#0000ff"
+                                radius: 10
+                            }
+                            contentItem: Text {
+                                text: mailButton.text
+                                font: mailButton.font
+                                color: mailButton.down ? "green" : "white"
+                            }
+                            text: "Показать Данные"
+                            onClicked:{
+                                restRequest();
+                            }
+                        }
                         Button{ // URL
                             id: butturl
                             background: Rectangle {
@@ -192,7 +212,7 @@ Page { // 5 ЛАБОРАТОРНАЯ
                             font.pointSize: 16
                             width: 30
                             text: "URL: "
-                            Layout.topMargin: 0
+                            // Layout.topMargin: 0
                             Layout.rightMargin: 50
                         }
                         TextArea  { // ВЫВОД URL
@@ -204,6 +224,8 @@ Page { // 5 ЛАБОРАТОРНАЯ
                             Layout.leftMargin: 50
                             // anchors.topMargin: 15
                         }
+
+
                     }
 
                 }
@@ -268,17 +290,22 @@ Page { // 5 ЛАБОРАТОРНАЯ
                     id:brow
                     anchors.fill: parent
                     visible: false
+                    //url:"https://connect.ok.ru/oauth/authorize?client_id=512000537954&scope=VALUABLE_ACCESS;LONG_ACCESS_TOKEN&response_type=token&redirect_uri=https://apiok.ru/oauth_callback"
                     url: "https://connect.mail.ru/oauth/authorize?client_id=772344&response_type=token&redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html"
                     onLoadingChanged: {
                         txtarea1.text = brow.url;
-                        qhttpcontroller.token(brow.url);
+                        qhttpcontroller.success(brow.url);
+                        qhttpcontroller.hashMD5(brow.url)
                     }
+
+
 
                     Button {
                         id:goback
-                        text: "X"
-                        Layout.leftMargin: 150
-                        Layout.topMargin: 300
+                        text: "❌"
+                        anchors.fill: right
+                        //Layout.leftMargin: 150
+                        //Layout.topMargin: 300
                         onClicked: {
                             //brow
                             //                    rectnglgeneral.visible = false;
@@ -288,6 +315,7 @@ Page { // 5 ЛАБОРАТОРНАЯ
                             //                            + "response_type=token&"
                             //                            + "redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html";
                         }
+
                     }
                 }
 

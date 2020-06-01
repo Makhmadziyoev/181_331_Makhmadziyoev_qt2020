@@ -11,7 +11,6 @@ Page { // 4 ЛАБОРАТОРНАЯ
     Connections{
         target: qhttpcontroller
         function onToQML(pString, nString){
-            //textArea.append(pString);
             txt.text = nString;
             dash.append(pString);
         }
@@ -20,7 +19,7 @@ Page { // 4 ЛАБОРАТОРНАЯ
         GridLayout{
             anchors.fill: parent
             columns: 3
-            RowLayout{
+            RowLayout { // баннер
                 Layout.fillWidth: true
                 Layout.column: 2
                 Layout.row: 0
@@ -38,7 +37,7 @@ Page { // 4 ЛАБОРАТОРНАЯ
                     Layout.fillWidth: true
                 }
             }
-            RowLayout {
+            RowLayout { // вывод числа
                 Layout.column: 2
                 Layout.row: 1
                 Layout.columnSpan: 3
@@ -46,13 +45,16 @@ Page { // 4 ЛАБОРАТОРНАЯ
                     Layout.fillWidth: true
                 }
                 Label {
-                    text: "Всего собрано средств:"
+                    text: "До следующего года осталось:"
                 }
                 TextField {
                     id: txt
                     readOnly: true
                     objectName: "textFielDate"
                     text: ""
+                }
+                Label {
+                   text: "дней"
                 }
                 Item{
                     Layout.fillWidth: true
@@ -65,7 +67,7 @@ Page { // 4 ЛАБОРАТОРНАЯ
     GridLayout {
         anchors.fill: parent
         columns: 3
-        RowLayout{
+        RowLayout{ // textarea браузер
             //Layout.fillWidth: true
             Layout.column: 1
             Layout.row: 0
@@ -80,7 +82,7 @@ Page { // 4 ЛАБОРАТОРНАЯ
                     anchors.fill: parent
                     TextArea{
                         id: dash
-                        textFormat: Text.PlainText
+                       // textFormat: Text.PlainText
                         width: 380
                         height: 250
                         Layout.fillWidth: true
@@ -89,16 +91,7 @@ Page { // 4 ЛАБОРАТОРНАЯ
                 }
             }
         }
-        //        RowLayout {
-        //            Layout.column: 2
-        //            Layout.row: 1
-        //            //Layout.columnSpan: 3
-        //            TextField {
-        //            id: textfil
-        //            text: "что играет:"
-        //            }
-        //        }
-        RowLayout{
+        RowLayout{ // кнопка реализации
             //Layout.fillWidth: true
             Layout.column: 3
             Layout.row: 2

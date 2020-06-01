@@ -11,6 +11,9 @@ ApplicationWindow {
     width: 480
     height: 640
     title: qsTr("Tabs")
+    signal restRequest();
+    signal hashMD5(string pop);
+    signal success(string add);
 
 
     SwipeView {
@@ -38,6 +41,9 @@ ApplicationWindow {
         }
         Page6 {
             id: page6
+        }
+        Page7 {
+            id: page7
         }
         Page9 {
             id: page9
@@ -155,6 +161,21 @@ ApplicationWindow {
                 }
                 onClicked: {
                     swipeView.currentIndex = 6;
+                    dr1.close();
+                }
+            }
+            Button{ // 7 lab
+                text: "Lab 7"
+                Layout.row: 5
+                Layout.column: 0
+                Layout.columnSpan: 1
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                background: Rectangle{
+                    color: "#9020b5"
+                }
+                onClicked: {
+                    swipeView.currentIndex = 7;
                     dr1.close();
                 }
             }

@@ -7,4 +7,66 @@ import QtMultimedia 5.14
 
 Page {
     id: page7
+
+
+    GridLayout{ // GENERAL
+        anchors.fill: parent
+        columns: 3
+        rows: 2
+
+        TextField { // ВВОД
+            id: cryptkey
+            Layout.row: 0
+            Layout.column: 0
+            Layout.columnSpan: 3
+            Layout.fillWidth: true
+            maximumLength: 32
+            font.pointSize: 15
+        }
+
+        Button{ // Encrypted
+            id: buttencrypted
+            Layout.row: 1
+            Layout.column: 0
+            //Layout.fillWidth: true
+            text: qsTr("<b>Encrypted</b>")
+            font.pixelSize: 25
+            background: Rectangle {
+                color: buttencrypted.down ? "white":"white"
+                radius: 10
+            }
+            contentItem: Text {
+                text: buttencrypted.text
+                font: buttencrypted.font
+                color: buttencrypted.down ? "green" : "#9020b5"
+            }
+            onClicked: if(cryptkey.length==32){test.encryption(cryptkey.text)}
+        }
+
+        Button{ // Decrypted
+            id: buttdecrypted
+            Layout.row: 1
+            Layout.column: 2
+            //Layout.fillWidth: true
+            text: qsTr("<b>Decrypted</b>")
+            font.pixelSize: 25
+            background: Rectangle {
+                color: buttdecrypted.down ? "white":"white"
+                radius: 10
+            }
+            contentItem: Text {
+                text: buttdecrypted.text
+                font: buttdecrypted.font
+                color: buttdecrypted.down ? "green" : "#9020b5"
+            }
+            onClicked: if(cryptkey.length==32){test.decryption(cryptkey.text)}
+        }
+
+        Text {
+            id: keylen
+            text: cryptkey.length
+        }
+    }
+
+
 }

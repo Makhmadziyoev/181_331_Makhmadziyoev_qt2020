@@ -41,6 +41,7 @@ Page { // 3 ЛАБОРАТОРНАЯ
 
                 id: bug
                 source: "elma.jpg"
+                //Layout.fillHeight: true
                 sourceSize: Qt.size(parent.width, parent.height)
                 Layout.alignment: Qt.AlignCenter
                 smooth: true

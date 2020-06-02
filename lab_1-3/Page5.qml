@@ -49,8 +49,6 @@ Page { // 5 ЛАБОРАТОРНАЯ
             }
         }
 
-        RowLayout {}
-
         RowLayout { // Браузер
             Layout.fillWidth: true
             Layout.column: 0
@@ -284,7 +282,6 @@ Page { // 5 ЛАБОРАТОРНАЯ
                         }
                     }
                 }
-
 
                 WebView { // реализация окна браузера
                     id:brow

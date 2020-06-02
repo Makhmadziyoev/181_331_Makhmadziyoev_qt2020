@@ -15,6 +15,7 @@ Page { // 4 ЛАБОРАТОРНАЯ
             dash.append(pString);
         }
     }
+
     header: Label { //
         GridLayout{
             anchors.fill: parent
@@ -64,6 +65,7 @@ Page { // 4 ЛАБОРАТОРНАЯ
         
         
     }
+
     GridLayout {
         anchors.fill: parent
         columns: 3

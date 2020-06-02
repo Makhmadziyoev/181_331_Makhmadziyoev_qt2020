@@ -15,28 +15,14 @@ Page{
     id:page6
 
 
-    ScrollView{
-        anchors.fill: parent
-        Image{
-            id: background
-            source: "qrc:/resources/nebo.jpg"
-            width: parent.width
-            height: parent.height*2
-            sourceSize.width: -1
-            fillMode: Image.TileHorizontally
-            y: -grid.contentY / 3 | -list.contentY / 3
-        }
-
-
-    ColumnLayout{
-
+    ColumnLayout{ // general
         anchors.fill: parent
         Layout.alignment: Qt.AlignHCenter
 
-    RowLayout{
+    RowLayout{ // radio buttons
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        RadioButton{ // выбор, что отображается на страничке
+        RadioButton{ // вывод отображения данных
             id: rad_1 // id
             //Layout.alignment: Qt.AlignLeft
             text: "Столбцы" // подпись
@@ -47,7 +33,8 @@ Page{
                     list.visible = false
                 }
         }
-        RadioButton{ // выбор, что отображается на страничке
+
+        RadioButton{ // вывод отображения данных
             id: rad_2 // id
             //Layout.alignment: Qt.AlignRight
             text: "Строки" // подпись
@@ -61,7 +48,7 @@ Page{
     }
 
 
-        GridView{
+        GridView{ //Вывод в столбцы
             id: grid
             visible: true
             Layout.fillHeight: true
@@ -94,25 +81,25 @@ Page{
                         Layout.margins: 5
                         fillMode: Image.PreserveAspectFit
                     }
-                    Label{ // имя
+                    Label{ //name
                         color: "black"
-                        text: user_id
+                        text: "Имя: " + user_id
                         Layout.column: 1
                         Layout.row: 1
                         Layout.fillHeight: true
                         Layout.preferredWidth: 100
                         //Layout.margins: 20
                     }
-                    Label{ // фамилия
+                    Label{ // second name
                         color: "black"
-                        text: textt
+                        text: "Фамилия: " + textt
                         Layout.column: 1
                         Layout.row: 2
                         Layout.fillHeight: true
                         Layout.preferredWidth: 100
                         //Layout.margins: 20
                     }
-                    Label{ // ID
+                    Label{ // Age
                         color: "black"
                         text: "Возраст: " + comments_count
                         Layout.column: 1
@@ -125,7 +112,7 @@ Page{
             }
         }
 
-        ListView{
+        ListView{ //Вывод в строку
             id: list
             visible: false
             Layout.fillHeight: true
@@ -142,10 +129,10 @@ Page{
                 Layout.margins: 10
                 GridLayout{
                     anchors.fill: parent
-                    columns: 3
-                    rows: 3
+                    columns: 4
+                    rows: 4
                     //Layout.margins: 20
-                    Image{
+                    Image{ // photo
                         source: pic50x50
                         Layout.column: 0
                         Layout.row: 0
@@ -155,29 +142,33 @@ Page{
                         Layout.margins: 5
                         fillMode: Image.PreserveAspectFit
                     }
-                    Label{ // имя
+                    Label{ // name
                         color: "black"
-                        text: user_id
+                        text:"Имя: " + user_id
                         Layout.column: 1
                         Layout.row: 1
                         Layout.fillHeight: true
                         Layout.preferredWidth: 100
                         //Layout.margins: 20
                     }
-                    Label{ // фамилия
+                    Label{ // last name
                         color: "black"
-                        text: textt
+                        text:"Фамилия: " + textt
                         Layout.column: 2
                         Layout.row: 1
                         Layout.fillHeight: true
                         Layout.preferredWidth: 100
                         //Layout.margins: 20
                     }
-                    Label{ // ID
-                        color: "black"
-                        text: "количество коментов" + comments_count
+                    Item {
                         Layout.column: 3
                         Layout.row: 1
+                        Layout.fillWidth: true}
+                    Label{ // Age
+                        color: "black"
+                        text: "Возраст: " + comments_count
+                        Layout.column: 1
+                        Layout.row: 2
                         Layout.fillHeight: true
                         Layout.preferredWidth: 100
                         //Layout.margins: 20
@@ -186,7 +177,7 @@ Page{
             }
         }
     }
-    }
+
 
 
 }

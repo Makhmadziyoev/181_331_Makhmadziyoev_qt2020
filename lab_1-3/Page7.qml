@@ -7,7 +7,46 @@ import QtMultimedia 5.14
 
 Page {
     id: page7
+    header: Rectangle{
+        gradient: Gradient {
+            GradientStop {
+                position: 0.00;
+                color: "#9020b5";
+            }
+            GradientStop {
+                position: 0.23;
+                color: "#ffffff";
+            }
+            GradientStop {
+                position: 0.45;
+                color: "#9020b5";
+            }
+            GradientStop {
+                position: 0.75;
+                color: "#ffffff";
+            }
+            GradientStop {
+                position: 1.00;
+                color: "#9020b5";
+            }
+        }
+        height: 50
 
+//        Label{
+//            text: "Aplication Work №7"
+//            font.bold: true
+//            font.family: "Times New Roman"
+//            color: "#FFFFFF"
+//            font.pixelSize: 22
+//            font.italic: false
+//            //anchors.left: parent.left
+//            //anchors.verticalCenter: parent.verticalCenter
+//            //anchors.margins: 75
+//            Layout.leftMargin: 90
+//            Layout.topMargin: 40
+//        }
+
+        }
 
     GridLayout{ // GENERAL
         anchors.fill: parent
@@ -22,6 +61,7 @@ Page {
             Layout.fillWidth: true
             maximumLength: 32
             font.pointSize: 15
+            placeholderText:  "Введите данные"
         }
 
         Button{ // Encrypted
@@ -62,7 +102,7 @@ Page {
             onClicked: if(cryptkey.length==32){test.decryption(cryptkey.text)}
         }
 
-        Text {
+        Text { // КОЛИЧЕСТВО ВВЕДЕНЫХ СИМВОЛОВ
             id: keylen
             text: cryptkey.length
         }

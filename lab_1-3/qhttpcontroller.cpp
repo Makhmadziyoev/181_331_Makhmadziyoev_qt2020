@@ -77,9 +77,9 @@ QString QHttpController::success(QString add)
 {
    qDebug() << "до   ";
     //QString m_accessToken; //token;
-    if(add.contains("email=") || add.contains("access_token="))
+    if(add.contains("fail=") || add.contains("access_token="))
     {
-        if (add.indexOf("access_token=")) // если все успешно
+        if (add.contains("access_token=")) // если все успешно
         {
             qDebug() << "цикл 1   ";
             m_accessToken = add.split("access_token=")[1].split("&")[0]; // записываем наш access_token в переменную
@@ -112,32 +112,7 @@ void QHttpController::hashMD5(QString add){
             myHashMd5 = QString(QCryptographicHash::hash((array),QCryptographicHash::Md5).toHex());
             qDebug() << "Наш хэш Али" << myHashMd5;
 
-
-
-
-
-
-
 }
-//    if (add.indexOf("session_secret_key=") != -1) // условие если он найден то записать в переменну
-//      {
-//           session_secr = add.split("session_secret_key=")[1].split("&")[0]; //запись в переменную токена
-//           qDebug() << "Наш сикрет: " << session_secr;
-//           QString param = "application_key=CDGGDNJGDIHBABABAformat=jsonmethod=photos.getPhotos"+session_secr;
-//              qDebug() << "Наш параметр" << param;
-//           QByteArray array;
-//           array.append(param);
-//           qDebug() << "Наш массив" << array;
-//           myHashMd5 = QString(QCryptographicHash::hash((array),QCryptographicHash::Md5).toHex());
-//           qDebug() << "Наш хеш uu" << myHashMd5;
-//      }
-//      else{
-//          qDebug() << "Ошибка";
-////          m_accessToken = "вы не вошли";
-////          return m_accessToken;
-
-//      }
-
 
 void QHttpController::restRequest(){
 
@@ -207,6 +182,49 @@ void QHttpController::restRequest(){
 
    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

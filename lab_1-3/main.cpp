@@ -5,9 +5,11 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "mailmodel.h"
+#include "cryptocontroller.h"
 
 int main(int argc, char *argv[])
 {
+    CryptoController test;
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
 
@@ -16,11 +18,16 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
+    test.setPath(app.applicationDirPath());
+
     QQmlContext *context = engine.rootContext();
     context->setContextProperty("qhttpcontroller", &qhttpcontroller); // поместить с++ объект в область видимости движка qml
 
+
     context->setContextProperty("mail_model", qhttpcontroller.mail_model); //Перемещаемая модель, которой присваиваем имя
     context->setContextProperty("qhttpcontroller", &qhttpcontroller);
+    context->setContextProperty("test", &test);
+
     //преобразование пути стартовой страницы из char в Qurl
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
@@ -50,3 +57,7 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+
+
+
+

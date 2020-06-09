@@ -8,6 +8,48 @@ import QtWebView 1.14
 
 Page { // 5 ЛАБОРАТОРНАЯ
     id: page5
+    header:
+        ToolBar{
+        anchors.top: parent.top
+        background: Rectangle{
+            implicitHeight: 50
+            width: parent.width
+
+            Text {
+                id: txt4
+                anchors.verticalCenter: parent.verticalCenter
+                //anchors.horizontalCenter: parent.horizontalCenter
+                anchors.right: txt44.left
+                font.pointSize: 35
+                font.family: "Dupe"
+                //font.italic: true
+                font.bold: true
+                color: "#ff8c00"
+                text: "@"
+            }
+            Text {
+                id: txt44
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pointSize: 25
+                font.family: "Dupe"
+                //font.italic: true
+                font.bold: true
+                color: "#ffffff"
+                text: "mail"
+            }
+
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "#1e90ff" }
+                GradientStop { position: 0.25; color: "#1e90ff" }
+                GradientStop { position: 0.5; color: "#1e90ff" }
+                GradientStop { position: 0.75; color: "#1e90ff" }
+                GradientStop { position: 1.0; color: "#1e90ff" }
+            }
+        }
+    }
+
+
     Connections{ //1
         target: qhttpcontroller
         function onToQML3(str1, str2){
@@ -31,298 +73,337 @@ Page { // 5 ЛАБОРАТОРНАЯ
         }
     }
 
-    GridLayout {
-        anchors.fill: parent
-        columns: 2
-        RowLayout { // text area cсылка
-            Layout.fillWidth: true
-            Layout.column: 0
-            Layout.row: 3
-            Layout.columnSpan: 2
+    TextArea { //ссылка местонахождения
+        id: txtarea1
+        height: parent.height* 0.2
+        width: parent.width * 0.9
+        font.pointSize: 10
+        anchors.margins: 15
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        wrapMode: TextArea.Wrap
 
-            TextArea { //ссылка местонахождения
-                id: txtarea1
-                width: parent.width //* 0.9
-                anchors.fill: parent
-                font.pointSize: 10
-                wrapMode: TextArea.Wrap
-            }
-        }
-
-        RowLayout { // Браузер
-            Layout.fillWidth: true
-            Layout.column: 0
-            Layout.row: 1
-            Layout.columnSpan: 2
-            Item{
-                Layout.fillWidth: true
-            }
-            Rectangle {
-                id: rctweb
-                width: 400
-                height: 500
-                Layout.alignment: Qt.AlignCenter
-
-                Rectangle{ // страница регистрации
-                    id: rectnglgeneral
-                    visible: true
-                    width: parent.width
-                    height: parent.height*0.5
-                    border.width : 10
-                    border.color: "#0000ff"
-
-                    ColumnLayout {
-                        Text  { //Баннер
-                            id: text18
-                            Layout.leftMargin: 90
-                            Layout.topMargin: 20
-                            font.pointSize: 18
-                            text: "ПРИЛОЖЕНИЕ "
-                        }
-                        Image {
-                            id: immail
-                            sourceSize.width: 200
-                            sourceSize.height: 150
-                            Layout.leftMargin: 50
-                            source: "mail.png"
-                        }
-                        Button{ // Зарегистрироваться
-                            id: buttback8
-                            background: Rectangle {
-                                color: buttback.down ? "#0000ff":"#0000ff"
-                                radius: 10
-                            }
-                            contentItem: Text {
-                                text: buttback8.text
-                                font: buttback8.font
-                                color: buttback8.down ? "blue" : "white"
-                            }
-                            Layout.leftMargin: 150
-                            Layout.topMargin: 210
-                            text: "Зарегистрироваться"
-                            font.pointSize: 16
-                            onClicked:
-                            {
-                                //brow
-                                //                    rectnglgeneral.visible = false;
-                                brow.visible = true; //видимость браузера
-                                //                    brow.url = "https://connect.mail.ru/oauth/authorize?"
-                                //                            + "client_id=772344&"
-                                //                            + "response_type=token&"
-                                //                            + "redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html";
-                            }
-
-                        }
-
-                    }
-
-                }
-
-                Rectangle{ // ввод данных зарегистрированного пользователя
-                    id: rectngl1
-                    visible: false
-                    width: parent.width
-                    height: parent.height*0.5
-                    border.width : 10
-                    border.color: "#00ff00"
-
-                    ColumnLayout {
-                        Text  { //Баннер
-                            id: text1
-                            Layout.leftMargin: 90
-                            Layout.topMargin: 20
-                            font.pointSize: 18
-                            text: "Доступ разрешен!"
-                        }
-                        Text  { // ACCESS TOKEN
-                            id: textactoken
-                            Layout.leftMargin: 20
-                            //                            Layout.topMargin: 250
-                            font.pointSize: 16
-                            width: 70
-                            text: "Access Token: "
-                        }
-                        Text  { // ВЫВОД ACCESS
-                            id: text3
-                            Layout.leftMargin: 30
-                            //                            Layout.topMargin: 260
-                            font.pointSize: 10
-                            width: parent.width*0.9
-                            height: 50
-                            wrapMode: TextArea.Wrap
-                        }
-                        Button{ // Вернуться
-                            id: buttback
-                            background: Rectangle {
-                                color: buttback.down ? "#0000ff":"#0000ff"
-                                radius: 10
-                            }
-                            contentItem: Text {
-                                text: buttback.text
-                                font: buttback.font
-                                color: buttback.down ? "green" : "white"
-                            }
-                            Layout.leftMargin: 250
-                            Layout.topMargin: 150
-                            text: "Вернуться"
-                            font.pointSize: 16
-                            onClicked:
-                            {
-                                buttback8.visible = false;
-                                rectngl1.visible = false;
-                                brow.visible = true; //видимость браузера
-                                brow.url = "https://connect.mail.ru/oauth/authorize?"
-                                        + "client_id=772344&"
-                                        + "response_type=token&"
-                                        + "redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html";
-                            }
-
-                        }
-                        Button{ // Показать данные
-                            id:mailButton
-                            Layout.leftMargin: 250
-                            Layout.topMargin: 15
-                            background: Rectangle {
-                                color: mailButton.down ? "#0000ff":"#0000ff"
-                                radius: 10
-                            }
-                            contentItem: Text {
-                                text: mailButton.text
-                                font: mailButton.font
-                                color: mailButton.down ? "green" : "white"
-                            }
-                            text: "Показать Данные"
-                            onClicked:{
-                                restRequest();
-                            }
-                        }
-                        Button{ // URL
-                            id: butturl
-                            background: Rectangle {
-                                color: butturl.down ? "#0000ff":"#0000ff"
-                                radius: 10
-                            }
-                            contentItem: Text {
-                                text: butturl.text
-                                font: butturl.font
-                                color: butturl.down ? "green" : "white"
-                            }
-                            font.pointSize: 16
-                            width: 30
-                            text: "URL: "
-                            // Layout.topMargin: 0
-                            Layout.rightMargin: 50
-                        }
-                        TextArea  { // ВЫВОД URL
-                            id: txtarea2
-                            font.pointSize: 10
-                            width: parent.width*0.9
-                            height: 70
-                            wrapMode: TextArea.Wrap
-                            Layout.leftMargin: 50
-                            // anchors.topMargin: 15
-                        }
-
-
-                    }
-
-                }
-
-                Rectangle{ // отказ, ввод не зарегестрированного пользователя
-                    id: rectngl2
-                    Layout.alignment: Qt.AlignCenter
-                    visible: false
-                    width: parent.width
-                    height: parent.height*0.5
-                    border.width : 10
-                    border.color: "#0000ff"
-                    ColumnLayout {
-                        Text { //Баннер
-                            id: txterror
-                            Layout.leftMargin: 90
-                            Layout.topMargin: 20
-                            font.pointSize: 18
-                            text: "Отказано в доступе!"
-                        }
-                        Image { // !!!знак
-                            id: znak
-                            //width: 50
-                            //height: 50
-                            Layout.leftMargin: 150
-                            Layout.topMargin: 40
-                            source: "znak.png"
-                        }
-                        Button{ // Повторить
-                            id: buttexit
-                            background: Rectangle {
-                                color: buttexit.down ? "#0000ff":"#0000ff"
-                                radius: 10
-                            }
-                            contentItem: Text {
-                                text: buttexit.text
-                                font: buttexit.font
-                                color: buttexit.down ? "green" : "white"
-                            }
-                            Layout.leftMargin: 250
-                            Layout.topMargin: 190
-                            text: "Повторить"
-                            font.pointSize: 16
-                            onClicked:
-                            {
-                                buttback8.visible = false;
-                                rectnglgeneral.visible = false;
-                                rectngl2.visible = false;
-                                brow.visible = true; //видимость браузера
-                                brow.url = "https://connect.mail.ru/oauth/authorize?"
-                                        + "client_id=772344&"
-                                        + "response_type=token&"
-                                        + "redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html";
-                            }
-
-                        }
-                    }
-                }
-
-                WebView { // реализация окна браузера
-                    id:brow
-                    anchors.fill: parent
-                    visible: false
-                    //url:"https://connect.ok.ru/oauth/authorize?client_id=512000537954&scope=VALUABLE_ACCESS;LONG_ACCESS_TOKEN&response_type=token&redirect_uri=https://apiok.ru/oauth_callback"
-                    url: "https://connect.mail.ru/oauth/authorize?client_id=772344&response_type=token&redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html"
-                    onLoadingChanged: {
-                        txtarea1.text = brow.url;
-                        qhttpcontroller.success(brow.url);
-                        qhttpcontroller.hashMD5(brow.url)
-                    }
-
-
-
-                    Button {
-                        id:goback
-                        text: "❌"
-                        anchors.fill: right
-                        //Layout.leftMargin: 150
-                        //Layout.topMargin: 300
-                        onClicked: {
-                            //brow
-                            //                    rectnglgeneral.visible = false;
-                            brow.visible = false; //видимость браузера
-                            //                    brow.url = "https://connect.mail.ru/oauth/authorize?"
-                            //                            + "client_id=772344&"
-                            //                            + "response_type=token&"
-                            //                            + "redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html";
-                        }
-
-                    }
-                }
-
-
-            }
-
-            Item{
-                Layout.fillWidth: true
-            }
-
-        }
     }
+
+
+    Rectangle{ //1 страница регистрации
+        id: rectnglgeneral
+        visible: if(rectngl1.visible == true){rectnglgeneral.visible = false}
+        width: parent.width
+        height: parent.height*0.5
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: txtarea1.top
+        color: "#fff"
+        anchors.leftMargin: 15
+        anchors.rightMargin: 15
+        anchors.bottomMargin: 50
+
+        Text  {     // Баннер
+            id: text18
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pointSize: 18
+            text: "Регистрация"
+        }
+        TextField { // Логин
+            id: email
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: text18.bottom
+            anchors.horizontalCenter:text18.horizontalCenter
+            font.pointSize: 15
+            placeholderText:  "E@mail"
+            color: "#0000ff"
+        }
+        TextField { // Пароль
+            id: password
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: email.bottom
+            anchors.horizontalCenter:email.horizontalCenter
+            font.pointSize: 15
+            placeholderText:  "Password"
+        }
+        RoundButton{
+            id:exit
+            anchors.top: password.bottom
+            anchors.left: password.left
+            text: "Войти"
+            background: Rectangle {
+                color: exit.down ? "#0000ff":"#0000ff"
+                radius: 10
+            }
+            contentItem: Text {
+                text: exit.text
+                font: exit.font
+                color: exit.down ? "green" : "white"
+            }
+        }
+        RoundButton{
+            id: reg
+            anchors.top: password.bottom
+            anchors.right: password.right
+            text: "Зарегистрироваться"
+            background: Rectangle {
+                color: reg.down ? "#0000ff":"#0000ff"
+                radius: 10
+            }
+            contentItem: Text {
+                text: reg.text
+                font: reg.font
+                color: reg.down ? "green" : "white"
+            }
+
+        }
+        RoundButton{
+            id:mailbut
+            anchors.top: reg.bottom
+            anchors.horizontalCenter:reg.horizontalCenter
+            icon.width: 80
+            icon.height: 60
+            icon.source: "qrc:mail.png"
+            onClicked:
+            {
+
+                brow.visible = true; //видимость браузера
+
+            }
+        }
+
+    }
+
+
+    Rectangle{ //2 ввод данных зарегистрированного пользователя
+        id: rectngl1
+        visible: false
+        width: parent.width
+        height: parent.height*0.5
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: txtarea1.top
+        anchors.leftMargin: 15
+        anchors.rightMargin: 15
+        anchors.bottomMargin: 50
+        border.color: "#00ff00"
+
+        Text  { //Баннер
+            id: text1
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pointSize: 18
+            text: "Доступ разрешен!"
+        }
+
+
+        Text  { // ACCESS TOKEN
+            id: textactoken
+            anchors.bottom: text3.top
+            anchors.horizontalCenter:parent.horizontalCenter
+            font.pointSize: 16
+            //width: 70
+            text: "Access Token: "
+            color: "blue"
+        }
+        Text  { // ВЫВОД ACCESS
+            id: text3
+            anchors.bottom: mailButton.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pointSize: 10
+            //width: parent.width*0.9
+            //height: 50
+            wrapMode: TextArea.Wrap
+        }
+        Button{ // Показать данные
+            id:mailButton
+            anchors.centerIn: parent
+            background: Rectangle {
+                color: mailButton.down ? "#0000ff":"#0000ff"
+                radius: 10
+            }
+            contentItem: Text {
+                text: mailButton.text
+                font: mailButton.font
+                color: mailButton.down ? "green" : "white"
+            }
+            text: "Показать Данные"
+            onClicked:{
+                restRequest();
+            }
+        }
+        Button{ // URL
+            id: butturl
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: mailButton.bottom
+            background: Rectangle {
+                color: butturl.down ? "#0000ff":"#0000ff"
+                radius: 10
+            }
+            contentItem: Text {
+                text: butturl.text
+                font: butturl.font
+                color: butturl.down ? "green" : "white"
+            }
+            font.pointSize: 16
+            //width: 30
+            text: "URL:"
+
+        }
+        TextArea  { // ВЫВОД URL
+            id: txtarea2
+            //anchors.left: butturl.right
+            anchors.bottom: parent.bottom
+            font.pointSize: 10
+            width: parent.width*0.9
+            //height: 70
+            wrapMode: TextArea.Wrap
+
+        }
+
+
+
+        //                    ColumnLayout {
+
+
+
+        //                        Button{ // Вернуться
+        //                            id: buttback
+        //                            background: Rectangle {
+        //                                color: buttback.down ? "#0000ff":"#0000ff"
+        //                                radius: 10
+        //                            }
+        //                            contentItem: Text {
+        //                                text: buttback.text
+        //                                font: buttback.font
+        //                                color: buttback.down ? "green" : "white"
+        //                            }
+        //                            Layout.leftMargin: 250
+        //                            Layout.topMargin: 150
+        //                            text: "Вернуться"
+        //                            font.pointSize: 16
+        //                            onClicked:
+        //                            {
+        //                                buttback8.visible = false;
+        //                                rectngl1.visible = false;
+        //                                brow.visible = true; //видимость браузера
+        //                                brow.url = "https://connect.mail.ru/oauth/authorize?"
+        //                                        + "client_id=772344&"
+        //                                        + "response_type=token&"
+        //                                        + "redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html";
+        //                            }
+
+        //                        }
+
+        //                        }
+
+
+
+        //                    }
+
+
+
+    }
+
+
+    Rectangle{ //3 отказ, ввод не зарегестрированного пользователя
+        id: rectngl2
+        visible: false
+        width: parent.width
+        height: parent.height*0.5
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: txtarea1.top
+        border.color: "#1e90ff"
+        anchors.leftMargin: 15
+        anchors.rightMargin: 15
+        anchors.bottomMargin: 50
+        Text { //Баннер
+            id: txterror
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pointSize: 18
+            text: "Отказано в доступе!"
+        }
+
+        Image { // !!!знак
+            id: znak
+            //                        anchors.top: parent.top
+            //                        anchors.horizontalCenter: parent.horizontalCenter
+            anchors.centerIn: parent
+            source: "znak.png"
+        }
+
+        Button{ // Повторить
+            id: buttexit
+            anchors.top: znak.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            background: Rectangle {
+                color: buttexit.down ? "#1e90ff":"#1e90ff"
+                radius: 10
+            }
+            contentItem: Text {
+                text: buttexit.text
+                font: buttexit.font
+                color: buttexit.down ? "green" : "white"
+            }
+
+            text: "Повторить"
+            font.pointSize: 16
+            onClicked:
+            {
+                //buttback8.visible = false;
+                rectnglgeneral.visible = false;
+                rectngl2.visible = false;
+                brow.visible = true; //видимость браузера
+                brow.url = "https://connect.mail.ru/oauth/authorize?"
+                        + "client_id=772344&"
+                        + "response_type=token&"
+                        + "redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html";
+            }
+
+        }
+
+    }
+
+
+    WebView { // реализация окна браузера
+        id:brow
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: txtarea1.top
+        anchors.leftMargin: 15
+        anchors.rightMargin: 15
+        anchors.bottomMargin: 15
+        width: parent.width
+        height: parent.height*0.7
+        visible: false
+        url: "https://connect.mail.ru/oauth/authorize?client_id=772344&response_type=token&redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html"
+        onLoadingChanged: {
+            txtarea1.text = brow.url;
+            qhttpcontroller.success(brow.url);
+            qhttpcontroller.hashMD5(brow.url)
+        }
+
+        Button {
+            id:goback
+            text: "❌ "
+            //visible: if(brow.visible == true)//{rectnglgeneral.visible = false}
+            anchors.leftMargin: 90
+            onClicked: {
+                brow.visible = false; //видимость браузера
+
+            }
+
+        }
+
+
+    }
+
+
+
+
+
+
+
 }

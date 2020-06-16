@@ -8,6 +8,47 @@ import QtCharts 2.0
 
 Page {
     id: page9
+    header:
+        ToolBar{
+        anchors.top: parent.top
+        background: Rectangle{
+            implicitHeight: 50
+            width: parent.width
+
+            Text {
+                id: txt479
+                anchors.verticalCenter: parent.verticalCenter
+                //anchors.horizontalCenter: parent.horizontalCenter
+                anchors.right: txt4479.left
+                font.pointSize: 35
+                font.family: "Dupe"
+                //font.italic: true
+                font.bold: true
+                color: "#ff8c00"
+                text: "9"
+            }
+            Text {
+                id: txt4479
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pointSize: 25
+                font.family: "Dupe"
+                //font.italic: true
+                font.bold: true
+                color: "#ffffff"
+                text: "lab"
+            }
+
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "#1e90ff" }
+                GradientStop { position: 0.25; color: "#1e90ff" }
+                GradientStop { position: 0.5; color: "#1e90ff" }
+                GradientStop { position: 0.75; color: "#1e90ff" }
+                GradientStop { position: 1.0; color: "#1e90ff" }
+            }
+        }
+    }
+
 
 
 }

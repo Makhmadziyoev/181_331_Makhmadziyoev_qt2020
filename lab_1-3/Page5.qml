@@ -58,7 +58,7 @@ Page { // 5 ЛАБОРАТОРНАЯ
             txtarea1.visible = false;
             txtarea2.text = str1;
             text3.text = str2;
-            buttback8.visible = false;
+            //buttback8.visible = false;
 
         }
     }
@@ -69,7 +69,7 @@ Page { // 5 ЛАБОРАТОРНАЯ
             brow.visible = false;
             rectngl2.visible = true;
             txtarea1.visible = false;
-            buttback8.visible = false;
+            //buttback8.visible = false;
         }
     }
 
@@ -378,7 +378,7 @@ Page { // 5 ЛАБОРАТОРНАЯ
         width: parent.width
         height: parent.height*0.7
         visible: false
-        url: "https://connect.mail.ru/oauth/authorize?client_id=772344&response_type=token&redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html"
+        url: "https://connect.mail.ru/oauth/authorize?client_id=772344&response_type=token&scope=messages&redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html"
         onLoadingChanged: {
             txtarea1.text = brow.url;
             qhttpcontroller.success(brow.url);

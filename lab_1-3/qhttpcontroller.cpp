@@ -99,12 +99,12 @@ QString QHttpController::success(QString add)
     qDebug() << "конец  ";
 }
 
-void QHttpController::hashMD5(QString add){
+void QHttpController::hashMD5(QString add){ // 5 lab
     qDebug() <<"вывод "<< add;
 
     session_secr = "1a49cb75f0714f0b460b3a1a2ef5bec7";
             qDebug() << "Наш сикрет: " << session_secr;
-            QString param = "7429961031030441625app_id=772344method=users.getInfosession_key=" + m_accessToken + session_secr;
+            QString param = "7429961031030441625app_id=772344method=photos.getAlbumssession_key=" + m_accessToken + session_secr;
             qDebug() << "Наш параметр Али" << param;
             QByteArray array;
             array.append(param);
@@ -124,9 +124,9 @@ void QHttpController::restRequest(){
                      &loop,
                      SLOT(quit()));
 
-      qDebug() << "Наш токен REST: " << m_accessToken;
+      qDebug() << "Наш токен REST: " << m_accessToken;//users.getInfo
        qDebug() << "Наш хеш REST" << myHashMd5;
-    QNetworkReply *reply = nam->get(QNetworkRequest(QUrl( "http://www.appsmail.ru/platform/api?method=users.getInfo&app_id=772344&session_key="+m_accessToken+"&sig="+myHashMd5 )));
+    QNetworkReply *reply = nam->get(QNetworkRequest(QUrl( "http://www.appsmail.ru/platform/api?method=photos.getAlbums&app_id=772344&session_key="+m_accessToken+"&sig="+myHashMd5 )));
 
 
                                                         /*"https://api.ok.ru/fb.do?application_key=CDGGDNJGDIHBABABA&format=json&method=photos.getPhotos"
@@ -144,7 +144,7 @@ void QHttpController::restRequest(){
       QJsonArray document = QJsonDocument::fromJson(reply->readAll()).array();
 
      qDebug() <<"Наш document"<< document;
-     // QJsonObject root = document.object();
+      //QJsonObject root = document.object();
       //qDebug() <<"Наш root"<< root;
       //QJsonValue itog = root.value("country");
      //qDebug() <<"Photos"<< itog;
@@ -158,20 +158,20 @@ void QHttpController::restRequest(){
        for(int i = 0; i < document.count(); i++){
 
         QJsonObject znach = document.at(i).toObject();
-//       // Забираем значения свойств имени
-         QString userid = znach.value("first_name").toString();
+//       // Название Альбома на латинице
+         QString userid = znach.value("title").toString();
          qDebug() << userid;
 
-//       // Забираем значения свойств фамилии
-         QString textp = znach.value("last_name").toString();
+//       // Описание
+         QString textp = znach.value("description").toString();
         qDebug() << textp;
 
 //       // Забираем значения id
-         int commentscount = znach.value("age").toInt();
+         int commentscount = znach.value("privacy").toInt();
          qDebug() << commentscount;
 
-//       // Забираем ссылку на главное фото
-         QUrl photo = znach.value("pic_50").toString();
+//       // Забираем ссылку на  фото
+         QUrl photo = znach.value("cover_url").toString(); //
          qDebug() << photo;
 
       mail_model->addItem(MailObject (userid, textp, photo, commentscount ));

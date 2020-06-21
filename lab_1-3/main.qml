@@ -14,7 +14,8 @@ ApplicationWindow {
     signal restRequest();
     signal hashMD5(string pop);
     signal success(string add);
-
+    signal db_read();
+    signal db_write();
 
     SwipeView {
         id: swipeView

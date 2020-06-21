@@ -1,6 +1,11 @@
-QT += quick
+#QT += quick
+QT += sql
+QT += quick network
+QT += charts
+QT += widgets
 
 CONFIG += c++11
+
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -8,8 +13,8 @@ CONFIG += c++11
 # deprecated API to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 DEPENDPATH += C:\Qt\Tools\OpenSSL\Win_x64\include
-INCLUDEPATH += C:\Qt\Tools\OpenSSL\Win_x64\include
-LIBS += C:\Qt\Tools\OpenSSL\Win_x64\lib\libcrypto.lib
+INCLUDEPATH += C:\OpenSSL-Win64\include #INCLUDEPATH += C:\Qt\Tools\OpenSSL\Win_x64\include
+LIBS +=	-LC:\OpenSSL-Win64\lib\ -llibeay32 -lssleay32 -lubsec #LIBS += C:\Qt\Tools\OpenSSL\Win_x64\lib\libcrypto.lib
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

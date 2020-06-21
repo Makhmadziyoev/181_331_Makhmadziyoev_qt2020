@@ -230,6 +230,8 @@ Page { // 5 ЛАБОРАТОРНАЯ
             text: "Показать Данные"
             onClicked:{
                 restRequest();
+                db_write();
+                db_read();
             }
         }
         Button{ // URL

@@ -162,8 +162,8 @@ Page{
                     Label{ // Age
                         id: lbl23
                         color: "black"
-                        text: //"Приватность: " + comments_count
-                              if (comments_count == 1) {lbl23.text = "ПРИВАТНО"}else{lbl23.text = "ОБЩЕДОСТУПНО"}
+                        text: "Количество: " + comments_count
+                             // if (comments_count == 1) {lbl23.text = "ПРИВАТНО"}else{lbl23.text = "ОБЩЕДОСТУПНО"}
 
                         Layout.column: 1
                         Layout.row: 3
@@ -230,7 +230,8 @@ Page{
                     Label{ //
                         id: lbl22
                         color: "black"
-                        text: if (comments_count == 1) {lbl22.text = "ПРИВАТНО"}else{lbl22.text = "ОБЩЕДОСТУПНО"} //"Статус: " + comments_count
+                        text:  "Количество: " + comments_count
+                            //if (comments_count == 1) {lbl22.text = "ПРИВАТНО"}else{lbl22.text = "ОБЩЕДОСТУПНО"} //"Статус: " + comments_count
                         Layout.column: 2
                         Layout.row: 1
                         Layout.fillHeight: true

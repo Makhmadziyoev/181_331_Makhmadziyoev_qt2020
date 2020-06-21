@@ -24,7 +24,7 @@ Page {
                 //font.italic: true
                 font.bold: true
                 color: "#ff8c00"
-                text: "8"
+                text: "o"
             }
             Text {
                 id: txt4478

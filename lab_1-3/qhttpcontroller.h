@@ -25,6 +25,8 @@ public slots:
     QString success(QString add);
     void restRequest();
     void hashMD5(QString add);
+    void db_write();
+    bool db_read();
 
 signals:
         void toQML(QString reply,QString number);
@@ -33,6 +35,7 @@ signals:
         void toQML2(QString reply);
         void toQML3(QString str1, QString str2);
         void toQML4();
+        void toQML9(int more);
 
 protected:
     QObject *showHttp;

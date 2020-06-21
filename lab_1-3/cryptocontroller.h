@@ -5,10 +5,10 @@
 #include <QObject>
 #include <QString>
 #include <QFile>
-#include <C:/Qt/Tools/OpenSSL/Win_x64/include/openssl/conf.h> // функции, структуры и константы настроймки OpenSSL
-#include <C:/Qt/Tools/OpenSSL/Win_x64/include/openssl/evp.h>  // сами криптографические функции http://wiki.openssl.org/index.php/EVP
-#include <C:/Qt/Tools/OpenSSL/Win_x64/include/openssl/err.h>  // коды внутренних ошибок OpenSSL
-#include <C:/Qt/Tools/OpenSSL/Win_x64/include/openssl/aes.h>  // симметричный алгоритм блочного шифрования
+# include  <C:/OpenSSL-Win64/include/openssl/conf.h >  // функции, структуры и константы настройким OpenSSL
+# include  <C:/OpenSSL-Win64/include/openssl/evp.h >   // сами криптографические функции http://wiki.openssl.org/index.php/EVP
+# include  <C:/OpenSSL-Win64/include/openssl/err.h >   // коды внутренних ошибок OpenSSL
+# include  <C:/OpenSSL-Win64/include/openssl/aes.h >   // симметричный алгоритм блочного шифрования
 
 #include <QtDebug>
 #include <QDir>

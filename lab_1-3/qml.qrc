@@ -17,7 +17,10 @@
         <file>mail.png</file>
         <file>Page7.qml</file>
         <file>elma.jpg</file>
-        <file>Page8.qml</file>
         <file>Page10.qml</file>
+        <file>in_ballon.png</file>
+        <file>out_ballon.png</file>
+        <file>background.jpg</file>
+        <file>send.png</file>
     </qresource>
 </RCC>

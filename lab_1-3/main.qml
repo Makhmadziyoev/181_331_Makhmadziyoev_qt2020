@@ -46,9 +46,9 @@ ApplicationWindow {
         Page7 {
             id: page7
         }
-        Page8 {
-            id: page8
-        }
+//        Page8 {
+//            id: page8
+//        }
         Page9 {
             id: page9
         }
@@ -184,21 +184,21 @@ ApplicationWindow {
                     dr1.close();
                 }
             }
-            Button{ // 8 lab
-                text: "Lab 8"
-                Layout.row: 5
-                Layout.column: 0
-                Layout.columnSpan: 1
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                background: Rectangle{
-                    color: "#9020b5"
-                }
-                onClicked: {
-                    swipeView.currentIndex = 8;
-                    dr1.close();
-                }
-            }
+//            Button{ // 8 lab
+//                text: "Lab 8"
+//                Layout.row: 5
+//                Layout.column: 0
+//                Layout.columnSpan: 1
+//                Layout.fillHeight: true
+//                Layout.fillWidth: true
+//                background: Rectangle{
+//                    color: "#9020b5"
+//                }
+//                onClicked: {
+//                    swipeView.currentIndex = 8;
+//                    dr1.close();
+//                }
+//            }
             Button{ // 9 lab
                 text: "Lab 9"
                 Layout.row: 5
@@ -210,7 +210,7 @@ ApplicationWindow {
                     color: "#9020b5"
                 }
                 onClicked: {
-                    swipeView.currentIndex = 9;
+                    swipeView.currentIndex = 8;
                     dr1.close();
                 }
             }
@@ -225,7 +225,7 @@ ApplicationWindow {
                     color: "#9020b5"
                 }
                 onClicked: {
-                    swipeView.currentIndex = 10;
+                    swipeView.currentIndex = 9;
                     dr1.close();
                 }
             }

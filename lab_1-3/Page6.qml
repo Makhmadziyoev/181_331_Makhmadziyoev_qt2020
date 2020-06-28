@@ -58,38 +58,38 @@ Page{
         anchors.fill: parent
         Layout.alignment: Qt.AlignHCenter
 
-    RowLayout{ // radio buttons
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        RowLayout{ // radio buttons
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        RadioButton{ // вывод отображения данных
-            id: rad_1 // id
-            //Layout.alignment: Qt.AlignLeft
-            text: "Столбцы" // подпись
-            checked: true // выбран по умолчанию
-            contentItem: Text {
+            RadioButton{ // вывод отображения данных
+                id: rad_1 // id
+                //Layout.alignment: Qt.AlignLeft
+                text: "Столбцы" // подпись
+                checked: true // выбран по умолчанию
+                contentItem: Text {
                     text: rad_1.text
                     font.bold: true
                     color: "#1e90ff"
                     font.pointSize: 18
                     font.family: "Dupe"
                     leftPadding: rad_1.indicator.width + rad_1.spacing
-                    //verticalAlignment: Text.AlignVCenter
-                }
-            Material.accent: "#1e90ff" // Material.Teal
-            onCheckedChanged: // если сменен выбор
-                if(rad_1.checked === true){ // если выбран rad1
-                    grid.visible = true
-                    list.visible = false
-                }
-        }
 
-        RadioButton{ // вывод отображения данных
-            id: rad_2 // id
-            //Layout.alignment: Qt.AlignRight
-            text: "Строки" // подпись
-            checked: false
-            Material.accent: "#1e90ff"
-            contentItem: Text {
+                }
+                Material.accent: "#1e90ff" // Material.Teal
+                onCheckedChanged: // если сменен выбор
+                                  if(rad_1.checked === true){ // если выбран rad1
+                                      grid.visible = true
+                                      list.visible = false
+                                  }
+            }
+
+            RadioButton{ // вывод отображения данных
+                id: rad_2 // id
+                //Layout.alignment: Qt.AlignRight
+                text: "Строки" // подпись
+                checked: false
+                Material.accent: "#1e90ff"
+                contentItem: Text {
                     text: rad_2.text
                     font.bold: true
                     color: "#1e90ff"
@@ -98,13 +98,27 @@ Page{
                     leftPadding: rad_2.indicator.width + rad_2.spacing
                     //verticalAlignment: Text.AlignVCenter
                 }
-            onCheckedChanged: // если вменен выбор
-                if(rad_2.checked === true){ // если выбран rad2
-                    list.visible = true // видео не отображается
-                    grid.visible = false // слайдер не отображается
-                }
+                onCheckedChanged: // если вменен выбор
+                                  if(rad_2.checked === true){ // если выбран rad2
+                                      list.visible = true // видео не отображается
+                                      grid.visible = false // слайдер не отображается
+                                  }
+            }
+
+            RoundButton {
+            Material.background:"#1e90ff"
+            Material.foreground: "white"
+            font.bold: true
+            font.pointSize: 15
+            font.family: "Dupe"
+            text: "Обновить"
+            onClicked: {
+            db_write();
+
+            //db_read();
+            }
+            }
         }
-    }
 
 
         GridView{ //Вывод в столбцы
@@ -116,6 +130,7 @@ Page{
             cellHeight: 150
             cellWidth: 300
             model: mail_model
+            clip: true
 
             //spacing: 10
 
@@ -163,7 +178,7 @@ Page{
                         id: lbl23
                         color: "black"
                         text: "Количество: " + comments_count
-                             // if (comments_count == 1) {lbl23.text = "ПРИВАТНО"}else{lbl23.text = "ОБЩЕДОСТУПНО"}
+                        // if (comments_count == 1) {lbl23.text = "ПРИВАТНО"}else{lbl23.text = "ОБЩЕДОСТУПНО"}
 
                         Layout.column: 1
                         Layout.row: 3
@@ -183,7 +198,7 @@ Page{
             enabled: true
             model: mail_model
             spacing: 30
-
+            clip:  true
             delegate: Rectangle{
                 color: "white"
                 width: 600
@@ -231,7 +246,7 @@ Page{
                         id: lbl22
                         color: "black"
                         text:  "Количество: " + comments_count
-                            //if (comments_count == 1) {lbl22.text = "ПРИВАТНО"}else{lbl22.text = "ОБЩЕДОСТУПНО"} //"Статус: " + comments_count
+                        //if (comments_count == 1) {lbl22.text = "ПРИВАТНО"}else{lbl22.text = "ОБЩЕДОСТУПНО"} //"Статус: " + comments_count
                         Layout.column: 2
                         Layout.row: 1
                         Layout.fillHeight: true

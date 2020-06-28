@@ -29,13 +29,13 @@ public slots:
     bool db_read();
 
 signals:
-        void toQML(QString reply,QString number);
-//
-        void toQML1(QString reply);
-        void toQML2(QString reply);
-        void toQML3(QString str1, QString str2);
-        void toQML4();
-        void toQML9(int more);
+    void toQML(QString reply,QString number);
+    //
+    void toQML1(QString reply);
+    void toQML2(QString reply);
+    void toQML3(QString str1, QString str2);
+    void toQML4();
+    void toQML9(int nature, int phone, int game, int car,int  avatar /*,int newalbum*/ );
 
 protected:
     QObject *showHttp;

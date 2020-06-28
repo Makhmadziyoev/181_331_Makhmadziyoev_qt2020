@@ -40,14 +40,14 @@ Page {
             font.pixelSize: 22
             font.italic: false
             anchors.centerIn: parent
-           // anchors.center: parent.center
+            // anchors.center: parent.center
             //anchors.verticalCenter: parent.verticalCenter
-//            anchors.margins: 75
+            //            anchors.margins: 75
             Layout.leftMargin: 90
             Layout.topMargin: 40
         }
 
-        }
+    }
 
     GridLayout{ // GENERAL
         anchors.fill: parent

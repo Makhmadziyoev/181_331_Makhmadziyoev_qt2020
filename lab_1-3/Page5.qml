@@ -83,7 +83,6 @@ Page { // 5 ЛАБОРАТОРНАЯ
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         wrapMode: TextArea.Wrap
-
     }
 
 
@@ -155,7 +154,6 @@ Page { // 5 ЛАБОРАТОРНАЯ
                 font: reg.font
                 color: reg.down ? "green" : "white"
             }
-
         }
         RoundButton{
             id:mailbut
@@ -166,12 +164,9 @@ Page { // 5 ЛАБОРАТОРНАЯ
             icon.source: "qrc:mail.png"
             onClicked:
             {
-
                 brow.visible = true; //видимость браузера
-
             }
         }
-
     }
 
 
@@ -260,51 +255,7 @@ Page { // 5 ЛАБОРАТОРНАЯ
             width: parent.width*0.9
             //height: 70
             wrapMode: TextArea.Wrap
-
         }
-
-
-
-        //                    ColumnLayout {
-
-
-
-        //                        Button{ // Вернуться
-        //                            id: buttback
-        //                            background: Rectangle {
-        //                                color: buttback.down ? "#0000ff":"#0000ff"
-        //                                radius: 10
-        //                            }
-        //                            contentItem: Text {
-        //                                text: buttback.text
-        //                                font: buttback.font
-        //                                color: buttback.down ? "green" : "white"
-        //                            }
-        //                            Layout.leftMargin: 250
-        //                            Layout.topMargin: 150
-        //                            text: "Вернуться"
-        //                            font.pointSize: 16
-        //                            onClicked:
-        //                            {
-        //                                buttback8.visible = false;
-        //                                rectngl1.visible = false;
-        //                                brow.visible = true; //видимость браузера
-        //                                brow.url = "https://connect.mail.ru/oauth/authorize?"
-        //                                        + "client_id=772344&"
-        //                                        + "response_type=token&"
-        //                                        + "redirect_uri=http%3A%2F%2Fconnect.mail.ru%2Foauth%2Fsuccess.html";
-        //                            }
-
-        //                        }
-
-        //                        }
-
-
-
-        //                    }
-
-
-
     }
 
 
@@ -330,8 +281,6 @@ Page { // 5 ЛАБОРАТОРНАЯ
 
         Image { // !!!знак
             id: znak
-            //                        anchors.top: parent.top
-            //                        anchors.horizontalCenter: parent.horizontalCenter
             anchors.centerIn: parent
             source: "znak.png"
         }
